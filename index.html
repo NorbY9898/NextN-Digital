@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digitális QR névjegykártya & mini weboldal – Prémium arany dizájn</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      background:radial-gradient(circle at top,#2b2b2b,#050505);
+      color:#f7f7f7;
+    }
+
+    a{text-decoration:none;color:inherit;}
+
+    .wrapper{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 16px 40px;
+    }
+
+    .accent{
+      color:#FFD700;
+    }
+
+    /* NAV */
+    header{
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:rgba(5,5,5,0.96);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,215,0,0.35);
+      box-shadow:0 4px 18px rgba(0,0,0,0.7);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 0;
+      gap:12px;
+    }
+    .logo-text{
+      font-weight:bold;
+      letter-spacing:1px;
+      color:#FFD700;
+      text-transform:uppercase;
+      font-size:0.95rem;
+    }
+    .nav-center{
+      display:flex;
+      flex:1;
+      justify-content:center;
+    }
+    .nav-links{
+      display:flex;
+      gap:18px;
+      font-size:0.9rem;
+    }
+    .nav-links a{
+      opacity:0.85;
+    }
+    .nav-links a:hover{
+      opacity:1;
+      color:#FFE88A;
+    }
+
+    /* Nyelvválasztó */
+    .lang-switch{
+      display:flex;
+      gap:6px;
+    }
+    .lang-btn{
+      border-radius:999px;
+      padding:4px 9px;
+      font-size:0.75rem;
+      border:1px solid rgba(255,215,0,0.4);
+      background:rgba(10,10,10,0.95);
+      color:#f5f5f5;
+      cursor:pointer;
+    }
+    .lang-btn.active{
+      background:#FFD700;
+      color:#201500;
+      font-weight:bold;
+      box-shadow:0 0 10px rgba(255,215,0,0.8);
+      border-color:#FFD700;
+    }
+
+    /* HERO */
+    .hero{
+      padding:40px 0 32px;
+      display:grid;
+      grid-template-columns:1.2fr 1fr;
+      gap:32px;
+      align-items:center;
+    }
+
+    @media (max-width: 800px){
+      .hero{
+        grid-template-columns:1fr;
+        text-align:center;
+      }
+      .nav{
+        flex-wrap:wrap;
+      }
+      .nav-center{
+        order:3;
+      }
+    }
+
+    .hero-title{
+      font-size:2.3rem;
+      margin-bottom:12px;
+    }
+    .hero-sub{
+      font-size:1rem;
+      color:#d6d6d6;
+      margin-bottom:20px;
+    }
+    .hero-badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:20px;
+    }
+    .badge{
+      font-size:0.75rem;
+      padding:4px 9px;
+      border-radius:999px;
+      border:1px solid rgba(255,215,0,0.7);
+      color:#FFE88A;
+      background:rgba(10,10,10,0.85);
+    }
+
+    .hero-cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .btn-primary{
+      background:linear-gradient(135deg,#FFE48A,#C8A200);
+      color:#211600;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:bold;
+      font-size:0.95rem;
+      border:none;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      box-shadow:0 0 18px rgba(255,215,0,0.85);
+    }
+    .btn-secondary{
+      border-radius:999px;
+      padding:9px 16px;
+      border:1px solid rgba(180,180,180,0.7);
+      font-size:0.9rem;
+      background:rgba(10,10,10,0.9);
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      color:#f0f0f0;
+    }
+    .btn-primary:hover{filter:brightness(1.05);}
+    .btn-secondary:hover{border-color:#FFD700;}
+
+    .hero-card{
+      border-radius:22px;
+      background:radial-gradient(circle at top,#232323,#050505);
+      border:1px solid rgba(255,215,0,0.7);
+      box-shadow:
+        0 0 22px rgba(0,0,0,0.9),
+        0 0 26px rgba(255,215,0,0.4);
+      padding:20px 18px 18px;
+    }
+    .hero-mini{
+      width:100%;
+      border-radius:16px;
+      border:1px solid rgba(255,215,0,0.8);
+      padding:16px 12px 14px;
+      background:linear-gradient(140deg,#141414,#050505);
+      text-align:center;
+      margin-bottom:10px;
+    }
+    .hero-mini-logo{
+      width:80px;
+      height:80px;
+      border-radius:18px;
+      border:2px solid #FFD700;
+      margin:0 auto 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#000;
+      color:#FFD700;
+      font-weight:bold;
+      font-size:0.8rem;
+      box-shadow:0 0 16px rgba(255,215,0,0.6);
+    }
+    .hero-mini-buttons{
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      margin-top:8px;
+      flex-wrap:wrap;
+    }
+    .mini-btn{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      border:1px solid rgba(255,215,0,0.9);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:0.75rem;
+      color:#FFE88A;
+      background:rgba(0,0,0,0.9);
+    }
+    .hero-note{
+      font-size:0.75rem;
+      color:#b5b5b5;
+      margin-top:6px;
+      text-align:center;
+    }
+
+    /* SECTIONS */
+    section{
+      padding:28px 0 8px;
+    }
+    h2.section-title{
+      font-size:1.6rem;
+      margin-bottom:12px;
+    }
+    .section-sub{
+      font-size:0.95rem;
+      color:#d0d0d0;
+      margin-bottom:18px;
+    }
+
+    /* HOW IT WORKS */
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:16px;
+    }
+    .step{
+      background:rgba(10,10,10,0.92);
+      padding:14px 14px 16px;
+      border-radius:14px;
+      border:1px solid #2b2b2b;
+      box-shadow:0 0 10px rgba(0,0,0,0.7);
+    }
+    .step-title{
+      font-weight:bold;
+      margin-bottom:6px;
+      color:#FFE88A;
+    }
+    .step-num{
+      font-size:0.75rem;
+      opacity:0.9;
+      margin-bottom:2px;
+      color:#bfbfbf;
+    }
+    .step p{
+      font-size:0.86rem;
+      color:#e2e2e2;
+    }
+
+    /* BENEFITS */
+    .benefits{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:16px;
+    }
+    .benefit{
+      background:rgba(8,8,8,0.96);
+      border-radius:14px;
+      border:1px solid #262626;
+      padding:14px;
+      box-shadow:0 0 12px rgba(0,0,0,0.85);
+    }
+    .benefit h3{
+      font-size:1rem;
+      margin-bottom:6px;
+      color:#FFE88A;
+    }
+    .benefit p{
+      font-size:0.86rem;
+      color:#e0e0e0;
+    }
+
+    /* EXAMPLES */
+    .examples{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:16px;
+    }
+    .example-card{
+      background:rgba(10,10,10,0.94);
+      border-radius:14px;
+      border:1px solid #2a2a2a;
+      padding:14px;
+      box-shadow:0 0 12px rgba(0,0,0,0.75);
+    }
+    .example-top{
+      font-size:0.8rem;
+      color:#b3b3b3;
+      margin-bottom:6px;
+    }
+    .example-name{
+      font-weight:bold;
+      margin-bottom:6px;
+      color:#FFE88A;
+    }
+    .example-link{
+      font-size:0.85rem;
+      color:#FFD700;
+      word-break:break-all;
+    }
+
+    /* PRICING */
+    .pricing{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:16px;
+    }
+    .price-card{
+      background:rgba(7,7,7,0.96);
+      border-radius:14px;
+      border:1px solid rgba(255,215,0,0.6);
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:
+        0 0 18px rgba(0,0,0,0.9),
+        0 0 18px rgba(255,215,0,0.25);
+    }
+    .price-tag{
+      position:absolute;
+      right:12px;
+      top:10px;
+      font-size:0.7rem;
+      padding:2px 8px;
+      border-radius:999px;
+      background:#FFD700;
+      color:#221700;
+      font-weight:bold;
+      text-transform:uppercase;
+    }
+    .price-name{
+      font-weight:bold;
+      margin-bottom:4px;
+      font-size:1rem;
+    }
+    .price-value{
+      font-size:1.2rem;
+      margin-bottom:8px;
+      color:#FFE88A;
+    }
+    .price-desc{
+      font-size:0.85rem;
+      color:#e0e0e0;
+      margin-bottom:8px;
+    }
+    .price-list{
+      font-size:0.8rem;
+      color:#d8d8d8;
+      margin-left:14px;
+    }
+
+    /* CONTACT */
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1.1fr 1fr;
+      gap:20px;
+      align-items:flex-start;
+    }
+    @media (max-width:800px){
+      .contact-grid{grid-template-columns:1fr;}
+    }
+    .contact-text{
+      font-size:0.9rem;
+      color:#e4e4e4;
+    }
+    .contact-highlight{
+      color:#FFE88A;
+      font-weight:bold;
+    }
+    .contact-box{
+      background:rgba(8,8,8,0.97);
+      border-radius:14px;
+      border:1px solid rgba(255,215,0,0.6);
+      padding:14px;
+      box-shadow:0 0 16px rgba(0,0,0,0.85);
+    }
+    .contact-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .contact-small{
+      font-size:0.8rem;
+      color:#b3b3b3;
+      margin-top:6px;
+    }
+
+    footer{
+      text-align:center;
+      font-size:0.75rem;
+      color:#8a8a8a;
+      padding:16px 0 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrapper nav">
+    <div class="logo-text" data-i18n="logo-text">QR Web Studio</div>
+
+    <div class="nav-center">
+      <nav class="nav-links">
+        <a href="#how" data-i18n="nav-how">Hogyan működik?</a>
+        <a href="#examples" data-i18n="nav-examples">Példák</a>
+        <a href="#pricing" data-i18n="nav-pricing">Árak</a>
+        <a href="#contact" data-i18n="nav-contact">Kapcsolat</a>
+      </nav>
+    </div>
+
+    <div class="lang-switch">
+      <button class="lang-btn active" id="btn-hu">HU</button>
+      <button class="lang-btn" id="btn-ro">RO</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrapper">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <h1 class="hero-title" data-i18n="hero-title">
+        <!-- JS tölti fel -->
+      </h1>
+      <p class="hero-sub" data-i18n="hero-sub"></p>
+
+      <div class="hero-badges">
+        <span class="badge" data-i18n="badge1"></span>
+        <span class="badge" data-i18n="badge2"></span>
+        <span class="badge" data-i18n="badge3"></span>
+      </div>
+
+      <div class="hero-cta">
+        <!-- WhatsApp számod helyes -->
+        <a class="btn-primary"
+           href="https://wa.me/40745326270?text=Szia,%20QR%20névjegykártyát%20és%20mini%20weboldalt%20szeretnék."
+           target="_blank"
+           data-i18n="hero-cta-primary">
+        </a>
+        <a class="btn-secondary" href="#examples" data-i18n="hero-cta-secondary"></a>
+      </div>
+    </div>
+
+    <!-- Jobb oldali kis preview kártya -->
+    <div class="hero-card">
+      <div class="hero-mini">
+        <div class="hero-mini-logo" data-i18n="preview-logo">
+          LOGÓ
+        </div>
+        <div style="font-size:0.9rem;margin-bottom:2px;" data-i18n="preview-name">Cég neve</div>
+        <div style="font-size:0.75rem;color:#c7c7c7;" data-i18n="preview-desc">
+          QR-kódról megnyíló digitális névjegy
+        </div>
+        <div class="hero-mini-buttons">
+          <div class="mini-btn">F</div>
+          <div class="mini-btn">IG</div>
+          <div class="mini-btn">TT</div>
+          <div class="mini-btn">📞</div>
+          <div class="mini-btn">✉️</div>
+        </div>
+      </div>
+      <p class="hero-note" data-i18n="preview-note">
+        Ilyen prémium felületet készítünk a te cégednek is – logóval, színekkel, linkekkel.
+      </p>
+    </div>
+  </section>
+
+  <!-- HOGYAN MŰKÖDIK -->
+  <section id="how">
+    <h2 class="section-title" data-i18n="how-title"></h2>
+    <p class="section-sub" data-i18n="how-sub"></p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" data-i18n="step1-num"></div>
+        <div class="step-title" data-i18n="step1-title"></div>
+        <p data-i18n="step1-text"></p>
+      </div>
+      <div class="step">
+        <div class="step-num" data-i18n="step2-num"></div>
+        <div class="step-title" data-i18n="step2-title"></div>
+        <p data-i18n="step2-text"></p>
+      </div>
+      <div class="step">
+        <div class="step-num" data-i18n="step3-num"></div>
+        <div class="step-title" data-i18n="step3-title"></div>
+        <p data-i18n="step3-text"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ELŐNYÖK -->
+  <section>
+    <h2 class="section-title" data-i18n="benefits-title"></h2>
+    <div class="benefits">
+      <div class="benefit">
+        <h3 data-i18n="benefit1-title"></h3>
+        <p data-i18n="benefit1-text"></p>
+      </div>
+      <div class="benefit">
+        <h3 data-i18n="benefit2-title"></h3>
+        <p data-i18n="benefit2-text"></p>
+      </div>
+      <div class="benefit">
+        <h3 data-i18n="benefit3-title"></h3>
+        <p data-i18n="benefit3-text"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PÉLDÁK -->
+  <section id="examples">
+    <h2 class="section-title" data-i18n="examples-title"></h2>
+    <p class="section-sub" data-i18n="examples-sub"></p>
+
+    <div class="examples">
+      <div class="example-card">
+        <div class="example-top" data-i18n="example1-top"></div>
+        <div class="example-name" data-i18n="example1-name"></div>
+        <a class="example-link" href="https://norby9898.github.io/partizan-security" target="_blank">
+          norby9898.github.io/partizan-security
+        </a>
+      </div>
+      <div class="example-card">
+        <div class="example-top" data-i18n="example2-top"></div>
+        <div class="example-name" data-i18n="example2-name"></div>
+        <a class="example-link" href="https://norby9898.github.io/nsport-web" target="_blank">
+          norby9898.github.io/nsport-web
+        </a>
+      </div>
+      <div class="example-card">
+        <div class="example-top" data-i18n="example3-top"></div>
+        <div class="example-name" data-i18n="example3-name"></div>
+        <p style="font-size:0.85rem;color:#ddd;margin-top:4px;" data-i18n="example3-text"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÁRAK -->
+  <section id="pricing">
+    <h2 class="section-title" data-i18n="pricing-title"></h2>
+    <p class="section-sub" data-i18n="pricing-sub"></p>
+
+    <div class="pricing">
+      <div class="price-card">
+        <span class="price-tag" data-i18n="price1-tag"></span>
+        <div class="price-name" data-i18n="price1-name"></div>
+        <div class="price-value" data-i18n="price1-value"></div>
+        <p class="price-desc" data-i18n="price1-desc"></p>
+        <ul class="price-list">
+          <li data-i18n="price1-li1"></li>
+          <li data-i18n="price1-li2"></li>
+          <li data-i18n="price1-li3"></li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <span class="price-tag" data-i18n="price2-tag"></span>
+        <div class="price-name" data-i18n="price2-name"></div>
+        <div class="price-value" data-i18n="price2-value"></div>
+        <p class="price-desc" data-i18n="price2-desc"></p>
+        <ul class="price-list">
+          <li data-i18n="price2-li1"></li>
+          <li data-i18n="price2-li2"></li>
+          <li data-i18n="price2-li3"></li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <span class="price-tag" data-i18n="price3-tag"></span>
+        <div class="price-name" data-i18n="price3-name"></div>
+        <div class="price-value" data-i18n="price3-value"></div>
+        <p class="price-desc" data-i18n="price3-desc"></p>
+        <ul class="price-list">
+          <li data-i18n="price3-li1"></li>
+          <li data-i18n="price3-li2"></li>
+          <li data-i18n="price3-li3"></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- KAPCSOLAT -->
+  <section id="contact">
+    <h2 class="section-title" data-i18n="contact-title"></h2>
+
+    <div class="contact-grid">
+      <div class="contact-text">
+        <p data-i18n="contact-main"></p>
+        <p style="margin-top:10px;" data-i18n="contact-list-intro"></p>
+        <ul class="price-list">
+          <li data-i18n="contact-li1"></li>
+          <li data-i18n="contact-li2"></li>
+          <li data-i18n="contact-li3"></li>
+        </ul>
+      </div>
+
+      <div class="contact-box">
+        <div style="font-weight:bold;margin-bottom:6px;" data-i18n="contact-direct"></div>
+        <div class="contact-buttons">
+          <a class="btn-secondary" href="tel:+40745326270" data-i18n="contact-call"></a>
+          <a class="btn-secondary" href="mailto:norbertnagy9898@yahoo.com" data-i18n="contact-email"></a>
+          <a class="btn-primary"
+             href="https://wa.me/40745326270?text=Szia,%20QR%20névjegykártya%20/%20mini%20weboldal%20érdekel."
+             target="_blank"
+             data-i18n="contact-whatsapp"></a>
+        </div>
+        <div class="contact-small" data-i18n="contact-langs"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span data-i18n="footer-text">© 2025 Norby98 – QR Web Studio. Minden jog fenntartva.</span>
+  </footer>
+
+</main>
+
+<script>
+const texts = {
+  hu: {
+    "logo-text": "QR Web Studio",
+    "nav-how": "Hogyan működik?",
+    "nav-examples": "Példák",
+    "nav-pricing": "Árak",
+    "nav-contact": "Kapcsolat",
+
+    "hero-title": 'Prémium <span class="accent">QR névjegykártya</span> & mini weboldal vállalkozásoknak',
+    "hero-sub": "Egyetlen QR-kóddal eléred: logó, elérhetőségek, közösségi média, mini webshop vagy szolgáltatás oldal. <br>Elegáns fekete–arany dizájn, ami első pillantásra bizalmat kelt.",
+    "badge1": "Kisvállalkozásoknak",
+    "badge2": "Mobilra optimalizálva",
+    "badge3": "GitHub Pages – havi díj nélkül",
+    "hero-cta-primary": "💬 Ajánlatot kérek WhatsAppon",
+    "hero-cta-secondary": "👀 Demók megtekintése",
+
+    "preview-logo": "LOGÓ",
+    "preview-name": "Cég neve",
+    "preview-desc": "QR-kódról megnyíló digitális névjegy",
+    "preview-note": "Ilyen prémium felületet készítünk a te cégednek is – logóval, színekkel, linkekkel.",
+
+    "how-title": "Hogyan működik?",
+    "how-sub": "3 egyszerű lépés, és kész a QR-névjegykártyád saját mini weboldallal.",
+    "step1-num": "1. Lépés",
+    "step1-title": "Adatok és logó elküldése",
+    "step1-text": "Elküldöd a logódat, színeidet, elérhetőségeidet, közösségi média linkeket és ha szeretnél, 2–3 fő terméket/szolgáltatást.",
+    "step2-num": "2. Lépés",
+    "step2-title": "Mini weboldal + QR kód",
+    "step2-text": "Megtervezzük az arculatodhoz illő prémium felületet, feltesszük GitHub Pages-re, majd generálunk hozzá QR kódot, amit nyomtathatsz.",
+    "step3-num": "3. Lépés",
+    "step3-title": "Használat és módosítás",
+    "step3-text": "A QR akármeddig érvényes, nem kell havi díjat fizetni. Ha később változik valami, elég a tartalmat frissíteni – a kód marad ugyanaz.",
+
+    "benefits-title": "Miért jobb, mint egy sima papír névjegykártya?",
+    "benefit1-title": "Mindig naprakész",
+    "benefit1-text": "Telefonszám, e-mail, Facebook, Instagram, TikTok – ha bármi változik, frissítjük a felületet, a kinyomtatott QR-kód maradhat.",
+    "benefit2-title": "Prémium első benyomás",
+    "benefit2-text": "Fekete–arany, elegáns dizájn, ami komolyan veszi a márkádat – nem egy sablonos „bio link”, hanem saját mini weboldal.",
+    "benefit3-title": "Havi díj nélkül",
+    "benefit3-text": "GitHub Pages-re kerül, így nincs külön tárhely díj. Egyszeri fejlesztési költség, utána szabadon használhatod.",
+
+    "examples-title": "Példák élő projektekre",
+    "examples-sub": "Ilyesmit kapsz te is – a saját logóddal, színeiddel és tartalmaddal.",
+    "example1-top": "Biztonsági cég – QR névjegy",
+    "example1-name": "Partizan Security",
+    "example2-top": "Sportbolt – mini market oldal",
+    "example2-name": "Nsport Oradea",
+    "example3-top": "Kombinált megoldás",
+    "example3-name": "QR profil + részletes oldal",
+    "example3-text": "QR névjegyről egy kattintással átnyit a részletes, termékeket vagy szolgáltatásokat bemutató mini weboldalra.",
+
+    "pricing-title": "Csomagok és árak",
+    "pricing-sub": "Induló árak – minden projekt egyedi, de ezekből ki tudsz indulni.",
+    "price1-tag": "Alap",
+    "price1-name": "QR névjegykártya oldal",
+    "price1-value": "≈ 400–600 RON",
+    "price1-desc": "1 oldal logóval, elérhetőségekkel és közösségi linkekkel.",
+    "price1-li1": "egyedi fekete–arany dizájn",
+    "price1-li2": "Facebook, Instagram, TikTok, telefon, e-mail gombok",
+    "price1-li3": "GitHub Pages beállítás, QR kód generálás",
+
+    "price2-tag": "Legnépszerűbb",
+    "price2-name": "QR névjegy + mini weboldal",
+    "price2-value": "≈ 900–1.600 RON",
+    "price2-desc": "QR profil oldal + külön mini “landing” termékekkel vagy szolgáltatásokkal.",
+    "price2-li1": "2 összekötött oldal (profil + részletes oldal)",
+    "price2-li2": "WhatsApp rendelés / ajánlatkérés gomb",
+    "price2-li3": "PDF katalógus letöltés (pl. kupék, árlista)",
+
+    "price3-tag": "Extra",
+    "price3-name": "Testreszabott megoldás",
+    "price3-value": "Egyedi árazás",
+    "price3-desc": "Ha több aloldal, több nyelv, blog vagy foglalási rendszer kell.",
+    "price3-li1": "összetettebb mini web – több szekcióval",
+    "price3-li2": "több QR kampány (külön üzletek, események)",
+    "price3-li3": "folyamatos frissítés / havi karbantartás megállapodás szerint",
+
+    "contact-title": "Kapcsolat & ajánlatkérés",
+    "contact-main": "Ha szeretnél egy QR-kódos digitális névjegykártyát vagy mini weboldalt a vállalkozásodnak, írj rám bátran.",
+    "contact-list-intro": "Röviden írd le:",
+    "contact-li1": "milyen típusú vállalkozásod van (pl. sportbolt, biztonsági cég, szépségszalon);",
+    "contact-li2": "mire használnád a QR-t (névjegy, reklám, mini webshop, stb.);",
+    "contact-li3": "van-e már logód és színvilágod.",
+    "contact-direct": "Közvetlen elérhetőségek",
+    "contact-call": "📞 Hívás",
+    "contact-email": "✉️ Email",
+    "contact-whatsapp": "💬 WhatsApp üzenet",
+    "contact-langs": "Válaszolok magyarul és románul is. 🙂",
+
+    "footer-text": "© 2025 Norby98 – QR Web Studio. Minden jog fenntartva."
+  },
+
+  ro: {
+    "logo-text": "QR Web Studio",
+    "nav-how": "Cum funcționează?",
+    "nav-examples": "Exemple",
+    "nav-pricing": "Prețuri",
+    "nav-contact": "Contact",
+
+    "hero-title": 'Card de vizită <span class="accent">digital cu QR</span> & mini site pentru afacerea ta',
+    "hero-sub": "Cu un singur cod QR clientul ajunge la logo, date de contact, rețele sociale, mini shop sau pagină de servicii. <br>Design elegant negru–auriu, care inspiră încredere din prima secundă.",
+    "badge1": "Pentru mici afaceri",
+    "badge2": "Optimizat pentru mobil",
+    "badge3": "GitHub Pages – fără taxă lunară",
+    "hero-cta-primary": "💬 Cer ofertă pe WhatsApp",
+    "hero-cta-secondary": "👀 Vezi exemple live",
+
+    "preview-logo": "LOGO",
+    "preview-name": "Nume firmă",
+    "preview-desc": "Card de vizită digital deschis din QR",
+    "preview-note": "Realizăm și pentru afacerea ta o astfel de pagină premium – cu logo, culori și link-uri personalizate.",
+
+    "how-title": "Cum funcționează?",
+    "how-sub": "3 pași simpli și cardul tău digital cu QR este gata.",
+    "step1-num": "Pasul 1",
+    "step1-title": "Trimiți datele și logo-ul",
+    "step1-text": "Îmi trimiți logo-ul, culorile brandului, datele de contact, link-urile de social media și, dacă dorești, 2–3 produse/servicii principale.",
+    "step2-num": "Pasul 2",
+    "step2-title": "Mini site + cod QR",
+    "step2-text": "Construiesc o pagină premium adaptată imaginii tale, o urc pe GitHub Pages și generez codul QR pe care îl poți tipări.",
+    "step3-num": "Pasul 3",
+    "step3-title": "Utilizare & modificări",
+    "step3-text": "Codul QR rămâne valabil oricât timp. Dacă se schimbă ceva, actualizăm conținutul – nu trebuie tipărit alt cod.",
+
+    "benefits-title": "De ce este mai bun decât un simplu card de vizită pe hârtie?",
+    "benefit1-title": "Mereu actualizat",
+    "benefit1-text": "Telefon, e-mail, Facebook, Instagram, TikTok – dacă se schimbă ceva, actualizăm pagina, iar codul QR tipărit rămâne același.",
+    "benefit2-title": "Primă impresie premium",
+    "benefit2-text": "Design elegant negru–auriu, care scoate brandul în evidență – nu un simplu „bio link”, ci mini site dedicat afacerii tale.",
+    "benefit3-title": "Fără taxă lunară",
+    "benefit3-text": "Pagina este găzduită pe GitHub Pages, deci nu plătești hosting separat. Plătești o singură dată realizarea, apoi o folosești cât vrei.",
+
+    "examples-title": "Exemple de proiecte live",
+    "examples-sub": "Așa arată și paginile tale – cu logo, culori și conținut personalizat.",
+    "example1-top": "Firmă de pază – card QR",
+    "example1-name": "Partizan Security",
+    "example2-top": "Magazin sport – mini market",
+    "example2-name": "Nsport Oradea",
+    "example3-top": "Soluție combinată",
+    "example3-name": "Profil cu QR + mini site",
+    "example3-text": "Din cardul de vizită cu QR clientul ajunge printr-un click la un mini site cu produse sau servicii detaliate.",
+
+    "pricing-title": "Pachete și prețuri",
+    "pricing-sub": "Prețuri orientative – fiecare proiect este diferit, dar te poți ghida după acestea.",
+    "price1-tag": "Basic",
+    "price1-name": "Pagină card de vizită cu QR",
+    "price1-value": "≈ 400–600 RON",
+    "price1-desc": "O pagină cu logo, date de contact și link-uri spre rețele sociale.",
+    "price1-li1": "design elegant negru–auriu",
+    "price1-li2": "butoane Facebook, Instagram, TikTok, telefon, e-mail",
+    "price1-li3": "configurare GitHub Pages și generare cod QR",
+
+    "price2-tag": "Popular",
+    "price2-name": "Card QR + mini site",
+    "price2-value": "≈ 900–1.600 RON",
+    "price2-desc": "Pagină profil + mini site separat cu produse sau servicii.",
+    "price2-li1": "2 pagini conectate (profil + pagină detaliată)",
+    "price2-li2": "buton de comandă sau ofertă direct pe WhatsApp",
+    "price2-li3": "posibilitate de catalog PDF descărcabil (cupe, listă de prețuri etc.)",
+
+    "price3-tag": "Extra",
+    "price3-name": "Soluție personalizată",
+    "price3-value": "Preț personalizat",
+    "price3-desc": "Pentru mai multe subpagini, mai multe limbi, blog sau sistem de programări.",
+    "price3-li1": "mini site mai complex – cu mai multe secțiuni",
+    "price3-li2": "campanii multiple de QR (magazine, evenimente separate)",
+    "price3-li3": "actualizări periodice / mentenanță lunară, la înțelegere",
+
+    "contact-title": "Contact & cerere ofertă",
+    "contact-main": "Dacă vrei un card de vizită digital cu cod QR sau un mini site pentru afacerea ta, scrie-mi cu încredere.",
+    "contact-list-intro": "Scrie-mi pe scurt:",
+    "contact-li1": "ce tip de afacere ai (ex: magazin sport, firmă de pază, salon de înfrumusețare);",
+    "contact-li2": "pentru ce vrei să folosești QR-ul (card, reclamă, mini shop etc.);",
+    "contact-li3": "dacă ai deja logo și culori de brand.",
+    "contact-direct": "Date de contact directe",
+    "contact-call": "📞 Sună-mă",
+    "contact-email": "✉️ Email",
+    "contact-whatsapp": "💬 Mesaj pe WhatsApp",
+    "contact-langs": "Răspund atât în maghiară, cât și în română. 🙂",
+
+    "footer-text": "© 2025 Norby98 – QR Web Studio. Toate drepturile rezervate."
+  }
+};
+
+function setLanguage(lang) {
+  const map = texts[lang];
+  if (!map) return;
+
+  // állítsuk át a lang attribútumot is
+  document.documentElement.lang = lang;
+
+  for (const key in map) {
+    const el = document.querySelector('[data-i18n="'+key+'"]');
+    if (el) {
+      el.innerHTML = map[key];
+    }
+  }
+
+  // gombok állapota
+  document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
+  document.getElementById('btn-ro').classList.toggle('active', lang === 'ro');
+}
+
+// alapértelmezett: HU
+setLanguage('hu');
+
+document.getElementById('btn-hu').addEventListener('click', () => setLanguage('hu'));
+document.getElementById('btn-ro').addEventListener('click', () => setLanguage('ro'));
+</script>
+
+</body>
+</html>

@@ -47,6 +47,21 @@
       padding:10px 0;
       gap:12px;
     }
+
+    /* ÚJ: nav logó + szöveg együtt */
+    .nav-brand{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .nav-logo{
+      height:26px;       /* ha nagy/kicsi, ezt állítsd */
+      width:auto;
+      display:block;
+      border-radius:6px; /* ha nem kell lekerekítés, törölheted */
+    }
+
     .logo-text{
       font-weight:bold;
       letter-spacing:1px;
@@ -54,6 +69,7 @@
       text-transform:uppercase;
       font-size:0.95rem;
     }
+
     .nav-center{
       display:flex;
       flex:1;
@@ -206,13 +222,6 @@
       font-weight:bold;
       font-size:0.8rem;
       box-shadow:0 0 16px rgba(255,215,0,0.6);
-      overflow:hidden;
-    }
-    .hero-mini-logo img{
-      max-width:100%;
-      max-height:100%;
-      object-fit:contain;
-      display:block;
     }
     .hero-mini-buttons{
       display:flex;
@@ -527,7 +536,13 @@
 
 <header>
   <div class="wrapper nav">
-    <div class="logo-text" data-i18n="logo-text">NextN-Digital</div>
+
+    <!-- LOGÓ + SZÖVEG FELÜL BALRA -->
+    <div class="nav-brand">
+      <!-- IDE TEDD A SAJÁT LOGÓ FÁJLNEVED -->
+      <img src="logo.png" alt="NextN-Digital logó" class="nav-logo">
+      <span class="logo-text" data-i18n="logo-text">NextN-Digital</span>
+    </div>
 
     <div class="nav-center">
       <nav class="nav-links">
@@ -572,10 +587,7 @@
     <!-- preview -->
     <div class="hero-card">
       <div class="hero-mini">
-        <!-- ITT A LOGÓ KÉPKÉNT -->
-        <div class="hero-mini-logo">
-          <img src="logo.png" alt="NextN-Digital logó">
-        </div>
+        <div class="hero-mini-logo" data-i18n="preview-logo">LOGÓ</div>
         <div style="font-size:0.9rem;margin-bottom:2px;" data-i18n="preview-name">Cég neve</div>
         <div style="font-size:0.75rem;color:#c7c7c7;" data-i18n="preview-desc">
           QR-kódról megnyíló digitális névjegy
@@ -801,6 +813,7 @@ const texts = {
     "hero-cta-primary": "💬 Ajánlatot kérek WhatsAppon",
     "hero-cta-secondary": "👀 Demók megtekintése",
 
+    "preview-logo": "LOGÓ",
     "preview-name": "Cég neve",
     "preview-desc": "QR-kódról megnyíló digitális névjegy",
     "preview-note": "Ilyen prémium felületet készítünk a te cégednek is – logóval, színekkel, linkekkel.",
@@ -910,6 +923,7 @@ const texts = {
     "hero-cta-primary": "💬 Cer ofertă pe WhatsApp",
     "hero-cta-secondary": "👀 Vezi exemple live",
 
+    "preview-logo": "LOGO",
     "preview-name": "Nume firmă",
     "preview-desc": "Card de vizită digital deschis din QR",
     "preview-note": "Realizăm și pentru afacerea ta o astfel de pagină premium – cu logo, culori și link-uri personalizate.",

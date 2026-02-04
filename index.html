@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NextN-Digital – QR névjegykártya & mini weboldal</title>
 
   <style>
@@ -26,9 +26,7 @@
       padding:0 16px 40px;
     }
 
-    .accent{
-      color:#FFD700;
-    }
+    .accent{ color:#FFD700; }
 
     /* NAV */
     header{
@@ -48,18 +46,18 @@
       gap:12px;
     }
 
-    /* ÚJ: nav logó + szöveg együtt */
     .nav-brand{
       display:flex;
       align-items:center;
       gap:8px;
+      min-width:190px;
     }
 
     .nav-logo{
-      height:26px;       /* ha nagy/kicsi, ezt állítsd */
+      height:26px;
       width:auto;
       display:block;
-      border-radius:6px; /* ha nem kell lekerekítés, törölheted */
+      border-radius:6px;
     }
 
     .logo-text{
@@ -68,6 +66,7 @@
       color:#FFD700;
       text-transform:uppercase;
       font-size:0.95rem;
+      white-space:nowrap;
     }
 
     .nav-center{
@@ -79,10 +78,10 @@
       display:flex;
       gap:18px;
       font-size:0.9rem;
+      flex-wrap:wrap;
+      justify-content:center;
     }
-    .nav-links a{
-      opacity:0.85;
-    }
+    .nav-links a{ opacity:0.85; }
     .nav-links a:hover{
       opacity:1;
       color:#FFE88A;
@@ -92,6 +91,8 @@
     .lang-switch{
       display:flex;
       gap:6px;
+      min-width:110px;
+      justify-content:flex-end;
     }
     .lang-btn{
       border-radius:999px;
@@ -124,17 +125,16 @@
         grid-template-columns:1fr;
         text-align:center;
       }
-      .nav{
-        flex-wrap:wrap;
-      }
-      .nav-center{
-        order:3;
-      }
+      .nav{ flex-wrap:wrap; }
+      .nav-center{ order:3; width:100%; }
+      .nav-brand{ justify-content:center; width:100%; }
+      .lang-switch{ justify-content:center; width:100%; }
     }
 
     .hero-title{
       font-size:2.3rem;
       margin-bottom:12px;
+      line-height:1.15;
     }
     .hero-sub{
       font-size:1rem;
@@ -187,8 +187,28 @@
       gap:6px;
       color:#f0f0f0;
     }
-    .btn-primary:hover{filter:brightness(1.05);}
-    .btn-secondary:hover{border-color:#FFD700;}
+    .btn-primary:hover{ filter:brightness(1.05); }
+    .btn-secondary:hover{ border-color:#FFD700; }
+
+    /* ÚJ: e-mail ajánlatkérés gomb (kosár helyett) */
+    .btn-offer{
+      border-radius:999px;
+      padding:10px 18px;
+      border:1px solid rgba(255,215,0,0.7);
+      background:rgba(10,10,10,0.92);
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      color:#FFE88A;
+      font-weight:bold;
+      font-size:0.92rem;
+      box-shadow:0 0 14px rgba(255,215,0,0.25);
+    }
+    .btn-offer:hover{
+      border-color:#FFD700;
+      box-shadow:0 0 18px rgba(255,215,0,0.35);
+    }
 
     .hero-card{
       border-radius:22px;
@@ -250,9 +270,7 @@
     }
 
     /* SECTIONS */
-    section{
-      padding:28px 0 8px;
-    }
+    section{ padding:28px 0 8px; }
     h2.section-title{
       font-size:1.6rem;
       margin-bottom:12px;
@@ -344,13 +362,13 @@
       word-break:break-all;
     }
 
-    /* PRICING */
-    .pricing{
+    /* ÚJ: AJÁNLATKÉRÉS (árak/kosár helyett) */
+    .offers{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
       gap:16px;
     }
-    .price-card{
+    .offer-card{
       background:rgba(7,7,7,0.96);
       border-radius:14px;
       border:1px solid rgba(255,215,0,0.6);
@@ -361,7 +379,7 @@
         0 0 18px rgba(0,0,0,0.9),
         0 0 18px rgba(255,215,0,0.25);
     }
-    .price-tag{
+    .offer-tag{
       position:absolute;
       right:12px;
       top:10px;
@@ -373,122 +391,72 @@
       font-weight:bold;
       text-transform:uppercase;
     }
-    .price-name{
+    .offer-name{
       font-weight:bold;
-      margin-bottom:4px;
+      margin-bottom:6px;
       font-size:1rem;
     }
-    .price-value{
-      font-size:1.2rem;
-      margin-bottom:8px;
-      color:#FFE88A;
-    }
-    .price-desc{
-      font-size:0.85rem;
+    .offer-desc{
+      font-size:0.88rem;
       color:#e0e0e0;
-      margin-bottom:8px;
+      margin-bottom:10px;
     }
-    .price-list{
-      font-size:0.8rem;
+    .offer-list{
+      font-size:0.82rem;
       color:#d8d8d8;
       margin-left:14px;
     }
-    .price-actions{
-      margin-top:10px;
+    .offer-actions{
+      margin-top:12px;
       display:flex;
       justify-content:flex-end;
     }
-    .btn-add-cart{
-      padding:6px 12px;
-      border-radius:999px;
-      border:none;
-      background:linear-gradient(135deg,#FFE48A,#C8A200);
-      color:#211500;
-      font-size:0.8rem;
-      font-weight:bold;
-      cursor:pointer;
-      box-shadow:0 0 12px rgba(255,215,0,0.7);
-    }
-    .btn-add-cart:hover{filter:brightness(1.05);}
 
-    /* ORDER / CART SECTION */
-    .cart-section{
-      margin-top:22px;
-    }
-    .cart-box{
-      background:rgba(10,10,10,0.92);
+    /* VIDEO */
+    .video-card{
+      margin-top:10px;
       border-radius:18px;
-      border:1px solid rgba(255,215,0,0.6);
+      background:rgba(8,8,8,0.97);
+      border:1px solid rgba(255,215,0,0.65);
       box-shadow:
         0 0 16px rgba(0,0,0,0.9),
-        0 0 18px rgba(255,215,0,0.25);
+        0 0 18px rgba(255,215,0,0.2);
       padding:16px;
     }
-    .cart-title{
-      font-size:1.1rem;
-      margin-bottom:8px;
+    .video-title{
+      font-size:1.25rem;
+      margin-bottom:6px;
+      color:#FFE88A;
       font-weight:bold;
     }
-    .cart-empty{
-      font-size:0.85rem;
-      color:#bfbfbf;
+    .video-sub{
+      font-size:0.95rem;
+      color:#d6d6d6;
+      margin-bottom:12px;
     }
-    .cart-items{
-      list-style:none;
-      margin:0 0 8px 0;
-      padding:0;
-      font-size:0.85rem;
+    .video-wrap{
+      width:100%;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(255,215,0,0.5);
+      background:#000;
+      /* mobilon is szép arány */
+      aspect-ratio: 16 / 9;
     }
-    .cart-items li{
-      display:flex;
-      justify-content:space-between;
-      margin-bottom:4px;
+
+    /* régi video tag maradhatna, de YouTube-nál iframe kell */
+    .video-wrap iframe{
+      width:100%;
+      height:100%;
+      display:block;
+      border:0;
     }
-    .cart-total{
-      display:flex;
-      justify-content:space-between;
-      font-size:0.9rem;
-      font-weight:bold;
-      margin-top:6px;
-      margin-bottom:10px;
-    }
-    .cart-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      justify-content:flex-end;
-    }
-    .btn-order,
-    .btn-clear{
-      padding:7px 12px;
-      border-radius:999px;
-      border:none;
+
+    .video-note{
+      margin-top:10px;
       font-size:0.8rem;
-      cursor:pointer;
-    }
-    .btn-order{
-      background:linear-gradient(135deg,#FFE48A,#C8A200);
-      color:#201500;
-      font-weight:bold;
-      box-shadow:0 0 14px rgba(255,215,0,0.7);
-    }
-    .btn-order:disabled{
-      opacity:0.4;
-      box-shadow:none;
-      cursor:not-allowed;
-    }
-    .btn-clear{
-      background:#333;
-      color:#f0f0f0;
-      border:1px solid #666;
-    }
-    .btn-clear:hover{
-      border-color:#FFD700;
-    }
-    .cart-note{
-      font-size:0.75rem;
       color:#b8b8b8;
-      margin-top:6px;
+      line-height:1.45;
     }
 
     /* CONTACT */
@@ -499,7 +467,7 @@
       align-items:flex-start;
     }
     @media (max-width:800px){
-      .contact-grid{grid-template-columns:1fr;}
+      .contact-grid{ grid-template-columns:1fr; }
     }
     .contact-text{
       font-size:0.9rem;
@@ -532,15 +500,14 @@
     }
   </style>
 </head>
-<body>
 
+<body>
 <header>
   <div class="wrapper nav">
 
-    <!-- LOGÓ + SZÖVEG FELÜL BALRA -->
     <div class="nav-brand">
-      <!-- IDE TEDD A SAJÁT LOGÓ FÁJLNEVED -->
-      <img src="logo.png" alt="NextN-Digital logó" class="nav-logo">
+      <!-- TODO: ide a saját logód fájlneve -->
+      <img src="logo.png" alt="NextN-Digital logó" class="nav-logo" />
       <span class="logo-text" data-i18n="logo-text">NextN-Digital</span>
     </div>
 
@@ -548,7 +515,8 @@
       <nav class="nav-links">
         <a href="#how" data-i18n="nav-how">Hogyan működik?</a>
         <a href="#examples" data-i18n="nav-examples">Példák</a>
-        <a href="#pricing" data-i18n="nav-pricing">Csomagok</a>
+        <a href="#offers" data-i18n="nav-offers">Ajánlatkérés</a>
+        <a href="#video" data-i18n="nav-video">Videó</a>
         <a href="#contact" data-i18n="nav-contact">Kapcsolat</a>
       </nav>
     </div>
@@ -557,6 +525,7 @@
       <button class="lang-btn active" id="btn-hu">HU</button>
       <button class="lang-btn" id="btn-ro">RO</button>
     </div>
+
   </div>
 </header>
 
@@ -578,8 +547,9 @@
         <a class="btn-primary"
            href="https://wa.me/40745326270?text=Szia,%20QR%20névjegykártyát%20és%20mini%20weboldalt%20szeretnék."
            target="_blank"
-           data-i18n="hero-cta-primary">
-        </a>
+           rel="noopener"
+           data-i18n="hero-cta-primary"></a>
+
         <a class="btn-secondary" href="#examples" data-i18n="hero-cta-secondary"></a>
       </div>
     </div>
@@ -589,9 +559,7 @@
       <div class="hero-mini">
         <div class="hero-mini-logo" data-i18n="preview-logo">LOGÓ</div>
         <div style="font-size:0.9rem;margin-bottom:2px;" data-i18n="preview-name">Cég neve</div>
-        <div style="font-size:0.75rem;color:#c7c7c7;" data-i18n="preview-desc">
-          QR-kódról megnyíló digitális névjegy
-        </div>
+        <div style="font-size:0.75rem;color:#c7c7c7;" data-i18n="preview-desc"></div>
         <div class="hero-mini-buttons">
           <div class="mini-btn">F</div>
           <div class="mini-btn">IG</div>
@@ -656,14 +624,14 @@
       <div class="example-card">
         <div class="example-top" data-i18n="example1-top"></div>
         <div class="example-name" data-i18n="example1-name"></div>
-        <a class="example-link" href="https://norby9898.github.io/partizan-security" target="_blank">
+        <a class="example-link" href="https://norby9898.github.io/partizan-security" target="_blank" rel="noopener">
           norby9898.github.io/partizan-security
         </a>
       </div>
       <div class="example-card">
         <div class="example-top" data-i18n="example2-top"></div>
         <div class="example-name" data-i18n="example2-name"></div>
-        <a class="example-link" href="https://norby9898.github.io/nsport-web" target="_blank">
+        <a class="example-link" href="https://norby9898.github.io/nsport-web" target="_blank" rel="noopener">
           norby9898.github.io/nsport-web
         </a>
       </div>
@@ -675,87 +643,79 @@
     </div>
   </section>
 
-  <!-- ÁRAK + KOSÁR -->
-  <section id="pricing">
-    <h2 class="section-title" data-i18n="pricing-title"></h2>
-    <p class="section-sub" data-i18n="pricing-sub"></p>
+  <!-- AJÁNLATKÉRÉS (ÁRAK/KOSÁR HELYETT) -->
+  <section id="offers">
+    <h2 class="section-title" data-i18n="offers-title"></h2>
+    <p class="section-sub" data-i18n="offers-sub"></p>
 
-    <div class="pricing">
-      <!-- BASIC -->
-      <div class="price-card">
-        <span class="price-tag" data-i18n="price1-tag"></span>
-        <div class="price-name" data-i18n="price1-name"></div>
-        <div class="price-value" data-i18n="price1-value"></div>
-        <p class="price-desc" data-i18n="price1-desc"></p>
-        <ul class="price-list">
-          <li data-i18n="price1-li1"></li>
-          <li data-i18n="price1-li2"></li>
-          <li data-i18n="price1-li3"></li>
+    <div class="offers">
+      <!-- ALAP -->
+      <div class="offer-card">
+        <span class="offer-tag" data-i18n="offer1-tag"></span>
+        <div class="offer-name" data-i18n="offer1-name"></div>
+        <p class="offer-desc" data-i18n="offer1-desc"></p>
+        <ul class="offer-list">
+          <li data-i18n="offer1-li1"></li>
+          <li data-i18n="offer1-li2"></li>
+          <li data-i18n="offer1-li3"></li>
         </ul>
-        <div class="price-actions">
-          <button class="btn-add-cart" data-pkg="basic" data-i18n="price-add"></button>
+        <div class="offer-actions">
+          <a class="btn-offer" id="btn-offer-basic" href="#" data-i18n="offer-btn"></a>
         </div>
       </div>
 
-      <!-- POPULAR -->
-      <div class="price-card">
-        <span class="price-tag" data-i18n="price2-tag"></span>
-        <div class="price-name" data-i18n="price2-name"></div>
-        <div class="price-value" data-i18n="price2-value"></div>
-        <p class="price-desc" data-i18n="price2-desc"></p>
-        <ul class="price-list">
-          <li data-i18n="price2-li1"></li>
-          <li data-i18n="price2-li2"></li>
-          <li data-i18n="price2-li3"></li>
+      <!-- LEGNEPSZERŰBB -->
+      <div class="offer-card">
+        <span class="offer-tag" data-i18n="offer2-tag"></span>
+        <div class="offer-name" data-i18n="offer2-name"></div>
+        <p class="offer-desc" data-i18n="offer2-desc"></p>
+        <ul class="offer-list">
+          <li data-i18n="offer2-li1"></li>
+          <li data-i18n="offer2-li2"></li>
+          <li data-i18n="offer2-li3"></li>
         </ul>
-        <div class="price-actions">
-          <button class="btn-add-cart" data-pkg="plus" data-i18n="price-add"></button>
+        <div class="offer-actions">
+          <a class="btn-offer" id="btn-offer-plus" href="#" data-i18n="offer-btn"></a>
         </div>
       </div>
 
-      <!-- EXTRA -->
-      <div class="price-card">
-        <span class="price-tag" data-i18n="price3-tag"></span>
-        <div class="price-name" data-i18n="price3-name"></div>
-        <div class="price-value" data-i18n="price3-value"></div>
-        <p class="price-desc" data-i18n="price3-desc"></p>
-        <ul class="price-list">
-          <li data-i18n="price3-li1"></li>
-          <li data-i18n="price3-li2"></li>
-          <li data-i18n="price3-li3"></li>
+      <!-- EGYEDI -->
+      <div class="offer-card">
+        <span class="offer-tag" data-i18n="offer3-tag"></span>
+        <div class="offer-name" data-i18n="offer3-name"></div>
+        <p class="offer-desc" data-i18n="offer3-desc"></p>
+        <ul class="offer-list">
+          <li data-i18n="offer3-li1"></li>
+          <li data-i18n="offer3-li2"></li>
+          <li data-i18n="offer3-li3"></li>
         </ul>
-        <div class="price-actions">
-          <button class="btn-add-cart" data-pkg="custom" data-i18n="price-add"></button>
+        <div class="offer-actions">
+          <a class="btn-offer" id="btn-offer-custom" href="#" data-i18n="offer-btn"></a>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- KOSÁR SZEKCIÓ -->
-    <div class="cart-section">
-      <h3 class="section-title" style="font-size:1.3rem;" data-i18n="order-title"></h3>
-      <p class="section-sub" style="margin-bottom:10px;" data-i18n="order-sub"></p>
+  <!-- VIDEÓ A LAP ALJÁN -->
+  <section id="video">
+    <h2 class="section-title" data-i18n="video-section-title"></h2>
 
-      <div class="cart-box">
-        <div class="cart-title" data-i18n="cart-title"></div>
+    <div class="video-card">
+      <div class="video-title" data-i18n="video-title"></div>
+      <div class="video-sub" data-i18n="video-sub"></div>
 
-        <div id="cart-empty" class="cart-empty" data-i18n="cart-empty"></div>
-
-        <ul id="cart-items" class="cart-items" style="display:none;"></ul>
-
-        <div id="cart-total-row" class="cart-total" style="display:none;">
-          <span data-i18n="cart-total-label"></span>
-          <span id="cart-total">0 RON</span>
-        </div>
-
-        <div class="cart-actions">
-          <button class="btn-clear" id="btn-clear" disabled data-i18n="clear-btn"></button>
-          <button class="btn-order" id="btn-order" disabled data-i18n="order-btn"></button>
-        </div>
-
-        <p class="cart-note" data-i18n="cart-note"></p>
+      <div class="video-wrap">
+        <!-- ✅ YouTube beágyazás (a te linkedből) -->
+        <iframe
+          src="https://www.youtube.com/embed/PNRaHAPwyg0"
+          title="YouTube video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
       </div>
-    </div>
 
+      <div class="video-note" data-i18n="video-note"></div>
+    </div>
   </section>
 
   <!-- KAPCSOLAT -->
@@ -766,7 +726,7 @@
       <div class="contact-text">
         <p data-i18n="contact-main"></p>
         <p style="margin-top:10px;" data-i18n="contact-list-intro"></p>
-        <ul class="price-list">
+        <ul class="offer-list">
           <li data-i18n="contact-li1"></li>
           <li data-i18n="contact-li2"></li>
           <li data-i18n="contact-li3"></li>
@@ -781,6 +741,7 @@
           <a class="btn-primary"
              href="https://wa.me/40745326270?text=Szia,%20QR%20névjegykártya%20/%20mini%20weboldal%20érdekel."
              target="_blank"
+             rel="noopener"
              data-i18n="contact-whatsapp"></a>
         </div>
         <div class="contact-small" data-i18n="contact-langs"></div>
@@ -795,14 +756,19 @@
 </main>
 
 <script>
+/* ==========================
+   NYELV + SZÖVEGEK
+   ========================== */
 let currentLang = 'hu';
 
 const texts = {
   hu: {
     "logo-text": "NextN-Digital",
+
     "nav-how": "Hogyan működik?",
     "nav-examples": "Példák",
-    "nav-pricing": "Csomagok",
+    "nav-offers": "Ajánlatkérés",
+    "nav-video": "Videó",
     "nav-contact": "Kapcsolat",
 
     "hero-title": 'Prémium <span class="accent">QR névjegykártya</span> & mini weboldal vállalkozásoknak',
@@ -848,50 +814,37 @@ const texts = {
     "example3-name": "QR profil + részletes oldal",
     "example3-text": "QR névjegyről egy kattintással átnyit a részletes, termékeket vagy szolgáltatásokat bemutató mini weboldalra.",
 
-    "pricing-title": "Csomagok és árak",
-    "pricing-sub": "Induló árak – minden projekt egyedi, de ezekből ki tudsz indulni.",
-    "price1-tag": "Alap",
-    "price1-name": "Alap QR névjegy",
-    "price1-value": "≈ 400–600 RON",
-    "price1-desc": "1 oldal logóval, elérhetőségekkel és közösségi linkekkel.",
-    "price1-li1": "egyedi fekete–arany dizájn",
-    "price1-li2": "Facebook, Instagram, TikTok, telefon, e-mail gombok",
-    "price1-li3": "GitHub Pages beállítás, QR-kód generálás",
+    /* ajánlatkérés szekció */
+    "offers-title": "Ajánlatkérés (árak helyett)",
+    "offers-sub": "Válaszd ki, mi érdekel, és egy gombnyomással írhatsz e-mailt. Minden csomag ára egyedi egyeztetés alapján készül.",
+    "offer1-tag": "Alap",
+    "offer1-name": "Alap QR névjegy",
+    "offer1-desc": "Gyors és profi digitális névjegy: logó, elérhetőségek, linkek.",
+    "offer1-li1": "egyedi fekete–arany dizájn",
+    "offer1-li2": "telefon, e-mail, social gombok",
+    "offer1-li3": "GitHub Pages + QR-kód",
 
-    "price2-tag": "Legnépszerűbb",
-    "price2-name": "QR névjegy + mini weboldal",
-    "price2-value": "≈ 900–1.600 RON",
-    "price2-desc": "QR profil oldal + külön mini „landing” termékekkel vagy szolgáltatásokkal.",
-    "price2-li1": "2 összekötött oldal (profil + részletes oldal)",
-    "price2-li2": "WhatsApp rendelés / ajánlatkérés gomb",
-    "price2-li3": "PDF katalógus letöltés (pl. kupák, árlista)",
+    "offer2-tag": "Népszerű",
+    "offer2-name": "QR névjegy + mini weboldal",
+    "offer2-desc": "Komplexebb megoldás: profil + részletes bemutató oldal termékekkel/szolgáltatásokkal.",
+    "offer2-li1": "2 összekötött oldal",
+    "offer2-li2": "WhatsApp ajánlatkérés / rendelés gomb",
+    "offer2-li3": "PDF katalógus / árlista link",
 
-    "price3-tag": "Extra",
-    "price3-name": "Testreszabott megoldás",
-    "price3-value": "Egyedi árazás",
-    "price3-desc": "Ha több aloldal, több nyelv, blog vagy foglalási rendszer kell.",
-    "price3-li1": "összetettebb mini web – több szekcióval",
-    "price3-li2": "több QR-kampány (külön üzletek, események)",
-    "price3-li3": "folyamatos frissítés / havi karbantartás megállapodás szerint",
+    "offer3-tag": "Extra",
+    "offer3-name": "Testreszabott megoldás",
+    "offer3-desc": "Ha több aloldal, több nyelv, blog vagy foglalás kell.",
+    "offer3-li1": "összetettebb mini web",
+    "offer3-li2": "több QR kampány",
+    "offer3-li3": "folyamatos frissítés igény szerint",
 
-    "price-add": "➕ Kosárba",
+    "offer-btn": "✉️ Ár ajánlatot kérek (Email)",
 
-    "order-title": "Online rendelés – kosár",
-    "order-sub": "Válaszd ki a csomagokat, tedd kosárba, majd küldd el rendelésed e-mailben.",
-    "cart-title": "Kosár",
-    "cart-empty": "A kosár jelenleg üres.",
-    "cart-total-label": "Összesen:",
-    "order-btn": "📩 Rendelés e-mailben",
-    "clear-btn": "🗑 Kosár ürítése",
-    "cart-note": "A rendelés gomb egy előre kitöltött e-mailt nyit meg, amit jóváhagyás után tudsz elküldeni.",
-    "order-email-subject": "Rendelés – NextN-Digital QR csomagok",
-    "order-email-greeting": "Szia,",
-    "order-email-intro": "A következő csomagokra szeretnék rendelést leadni:",
-    "order-email-total": "Összesen:",
-    "order-email-contact-label": "Kérlek, vedd fel velem a kapcsolatot a részletek egyeztetéséhez.",
-    "order-email-name": "Név:",
-    "order-email-phone": "Telefonszám:",
-    "order-email-email": "E-mail cím:",
+    /* Videó */
+    "video-section-title": "Bemutató videó",
+    "video-title": "Mivel lesz könnyebb elérni téged?",
+    "video-sub": "Nézd meg a kis videót, és lásd, hogyan működik a QR névjegykártya a gyakorlatban.",
+    "video-note": "Tipp: a videó elmagyarázza, hogyan menthetik el az ügyfelek egy kattintással a telefonszámodat, e-mail címedet, és hogyan tudnak azonnal írni vagy hívni.",
 
     "contact-title": "Kapcsolat & ajánlatkérés",
     "contact-main": "Ha szeretnél egy QR-kódos digitális névjegykártyát vagy mini weboldalt a vállalkozásodnak, írj rám bátran.",
@@ -910,9 +863,11 @@ const texts = {
 
   ro: {
     "logo-text": "NextN-Digital",
+
     "nav-how": "Cum funcționează?",
     "nav-examples": "Exemple",
-    "nav-pricing": "Pachete",
+    "nav-offers": "Cerere ofertă",
+    "nav-video": "Video",
     "nav-contact": "Contact",
 
     "hero-title": 'Card de vizită <span class="accent">digital cu QR</span> & mini site pentru afacerea ta',
@@ -958,55 +913,42 @@ const texts = {
     "example3-name": "Profil cu QR + mini site",
     "example3-text": "Din cardul de vizită cu QR clientul ajunge printr-un click la un mini site cu produse sau servicii detaliate.",
 
-    "pricing-title": "Pachete și prețuri",
-    "pricing-sub": "Prețuri orientative – fiecare proiect este diferit, dar te poți ghida după acestea.",
-    "price1-tag": "Basic",
-    "price1-name": "Pagină card de vizită cu QR",
-    "price1-value": "≈ 400–600 RON",
-    "price1-desc": "O pagină cu logo, date de contact și link-uri spre rețele sociale.",
-    "price1-li1": "design elegant negru–auriu",
-    "price1-li2": "butoane Facebook, Instagram, TikTok, telefon, e-mail",
-    "price1-li3": "configurare GitHub Pages și generare cod QR",
+    /* cerere ofertă */
+    "offers-title": "Cerere de ofertă (în loc de prețuri)",
+    "offers-sub": "Alege ce te interesează și trimite un e-mail dintr-un click. Prețul se stabilește în funcție de cerințe.",
+    "offer1-tag": "Basic",
+    "offer1-name": "Card QR (1 pagină)",
+    "offer1-desc": "Card digital rapid și elegant: logo, contact, butoane și link-uri.",
+    "offer1-li1": "design negru–auriu personalizat",
+    "offer1-li2": "butoane telefon, e-mail, social",
+    "offer1-li3": "GitHub Pages + cod QR",
 
-    "price2-tag": "Popular",
-    "price2-name": "Card QR + mini site",
-    "price2-value": "≈ 900–1.600 RON",
-    "price2-desc": "Pagină profil + mini site separat cu produse sau servicii.",
-    "price2-li1": "2 pagini conectate (profil + pagină detaliată)",
-    "price2-li2": "buton de comandă sau ofertă direct pe WhatsApp",
-    "price2-li3": "posibilitate de catalog PDF descărcabil (cupe, listă de prețuri etc.)",
+    "offer2-tag": "Popular",
+    "offer2-name": "Card QR + mini site",
+    "offer2-desc": "Soluție mai completă: profil + pagină detaliată pentru produse/servicii.",
+    "offer2-li1": "2 pagini conectate",
+    "offer2-li2": "buton WhatsApp cerere ofertă / comandă",
+    "offer2-li3": "link catalog PDF / listă prețuri",
 
-    "price3-tag": "Extra",
-    "price3-name": "Soluție personalizată",
-    "price3-value": "Preț personalizat",
-    "price3-desc": "Pentru mai multe subpagini, mai multe limbi, blog sau sistem de programări.",
-    "price3-li1": "mini site mai complex – cu mai multe secțiuni",
-    "price3-li2": "campanii multiple cu QR (magazine, evenimente separate)",
-    "price3-li3": "actualizări periodice / mentenanță lunară, la înțelegere",
+    "offer3-tag": "Extra",
+    "offer3-name": "Soluție personalizată",
+    "offer3-desc": "Pentru subpagini multiple, mai multe limbi, blog sau programări.",
+    "offer3-li1": "mini site complex",
+    "offer3-li2": "campanii multiple cu QR",
+    "offer3-li3": "actualizări periodice la cerere",
 
-    "price-add": "➕ Adaugă în coș",
+    "offer-btn": "✉️ Cer ofertă (Email)",
 
-    "order-title": "Comandă online – coș",
-    "order-sub": "Alege pachetele, adaugă-le în coș, apoi trimite comanda prin e-mail.",
-    "cart-title": "Coș",
-    "cart-empty": "Coșul este gol momentan.",
-    "cart-total-label": "Total:",
-    "order-btn": "📩 Trimite comanda pe e-mail",
-    "clear-btn": "🗑 Golește coșul",
-    "cart-note": "Butonul de comandă deschide un e-mail precompletat, pe care îl trimiți după ce verifici detaliile.",
-    "order-email-subject": "Comandă – Pachete NextN-Digital",
-    "order-email-greeting": "Salut,",
-    "order-email-intro": "Aș dori să comand următoarele pachete:",
-    "order-email-total": "Total:",
-    "order-email-contact-label": "Te rog să mă contactezi pentru detalii.",
-    "order-email-name": "Nume:",
-    "order-email-phone": "Telefon:",
-    "order-email-email": "Adresă de e-mail:",
+    /* Video */
+    "video-section-title": "Video demonstrativ",
+    "video-title": "Cum devine mai ușor să te contacteze?",
+    "video-sub": "Uită-te la clipul scurt și vezi cum funcționează cardul QR în practică.",
+    "video-note": "Tip: videoclipul arată cum pot salva clienții numărul tău, e-mailul și cum pot suna sau trimite mesaj imediat.",
 
     "contact-title": "Contact & cerere de ofertă",
     "contact-main": "Dacă vrei un card de vizită digital cu cod QR sau un mini site pentru afacerea ta, scrie-mi cu încredere.",
     "contact-list-intro": "Scrie-mi pe scurt:",
-    "contact-li1": "ce tip de afacere ai (ex: magazin sport, firmă de pază, salon de înfrumusețare);",
+    "contact-li1": "ce tip de afacere ai (ex: magazin sport, firmă de pază, salon etc.);",
     "contact-li2": "pentru ce vrei să folosești QR-ul (card, reclamă, mini shop etc.);",
     "contact-li3": "dacă ai deja logo și culori de brand.",
     "contact-direct": "Date de contact directe",
@@ -1019,136 +961,159 @@ const texts = {
   }
 };
 
-// csomagok konfiguráció (árak a kosárhoz)
-const packageConfig = {
-  basic: { price: 450, nameKey: 'price1-name' },
-  plus:  { price: 1100, nameKey: 'price2-name' },
-  custom:{ price: 0, nameKey: 'price3-name' }
+/* ==========================
+   AJÁNLATKÉRÉS E-MAIL (fix + nyelvfüggő subject/body)
+   ========================== */
+const EMAIL_TO = "norbertnagy9898@yahoo.com";
+
+const offerMail = {
+  basic: {
+    hu: {
+      subject: "Árajánlatkérés – Alap QR névjegy",
+      body:
+`Szia!
+
+Szeretnék árajánlatot kérni az "Alap QR névjegy" csomagra.
+
+Vállalkozás típusa:
+Mit szeretnék a QR oldalon megjeleníteni (telefon, email, social, stb.):
+
+Név:
+Telefonszám:
+E-mail:
+`
+    },
+    ro: {
+      subject: "Cerere ofertă – Card QR (Basic)",
+      body:
+`Salut!
+
+Aș dori o ofertă pentru pachetul "Card QR (Basic)".
+
+Tip afacere:
+Ce dorești să apară pe pagina QR (telefon, email, social etc.):
+
+Nume:
+Telefon:
+E-mail:
+`
+    }
+  },
+
+  plus: {
+    hu: {
+      subject: "Árajánlatkérés – QR névjegy + mini weboldal",
+      body:
+`Szia!
+
+Szeretnék árajánlatot kérni a "QR névjegy + mini weboldal" csomagra.
+
+Vállalkozás típusa:
+Milyen szekciók kellenek (termékek/szolgáltatások, galéria, árlista, stb.):
+
+Név:
+Telefonszám:
+E-mail:
+`
+    },
+    ro: {
+      subject: "Cerere ofertă – Card QR + mini site",
+      body:
+`Salut!
+
+Aș dori o ofertă pentru pachetul "Card QR + mini site".
+
+Tip afacere:
+Ce secțiuni dorești (produse/servicii, galerie, listă prețuri etc.):
+
+Nume:
+Telefon:
+E-mail:
+`
+    }
+  },
+
+  custom: {
+    hu: {
+      subject: "Árajánlatkérés – Egyedi megoldás",
+      body:
+`Szia!
+
+Szeretnék árajánlatot kérni egy egyedi megoldásra.
+
+Rövid leírás:
+Kért funkciók (pl. több nyelv, foglalás, blog, több aloldal):
+
+Név:
+Telefonszám:
+E-mail:
+`
+    },
+    ro: {
+      subject: "Cerere ofertă – Soluție personalizată",
+      body:
+`Salut!
+
+Aș dori o ofertă pentru o soluție personalizată.
+
+Descriere scurtă:
+Funcții dorite (ex. mai multe limbi, programări, blog, subpagini):
+
+Nume:
+Telefon:
+E-mail:
+`
+    }
+  }
 };
 
+function buildMailto(subject, body){
+  const s = encodeURIComponent(subject);
+  const b = encodeURIComponent(body);
+  return `mailto:${EMAIL_TO}?subject=${s}&body=${b}`;
+}
+
+function refreshOfferButtons(){
+  document.getElementById("btn-offer-basic").setAttribute(
+    "href",
+    buildMailto(offerMail.basic[currentLang].subject, offerMail.basic[currentLang].body)
+  );
+  document.getElementById("btn-offer-plus").setAttribute(
+    "href",
+    buildMailto(offerMail.plus[currentLang].subject, offerMail.plus[currentLang].body)
+  );
+  document.getElementById("btn-offer-custom").setAttribute(
+    "href",
+    buildMailto(offerMail.custom[currentLang].subject, offerMail.custom[currentLang].body)
+  );
+}
+
+/* ==========================
+   NYELVÁLLÍTÁS
+   ========================== */
 function setLanguage(lang) {
   const map = texts[lang];
   if (!map) return;
+
   currentLang = lang;
   document.documentElement.lang = lang;
 
   for (const key in map) {
     const el = document.querySelector('[data-i18n="'+key+'"]');
-    if (el) {
-      el.innerHTML = map[key];
-    }
+    if (el) el.innerHTML = map[key];
   }
 
   document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
   document.getElementById('btn-ro').classList.toggle('active', lang === 'ro');
 
-  // kosár újrarenderelése, hogy a nyelv is frissüljön
-  renderCart();
+  refreshOfferButtons();
 }
 
-// kosár
-const cart = [];
-const cartItemsEl = document.getElementById('cart-items');
-const cartEmptyEl = document.getElementById('cart-empty');
-const cartTotalRowEl = document.getElementById('cart-total-row');
-const cartTotalEl = document.getElementById('cart-total');
-const btnOrder = document.getElementById('btn-order');
-const btnClear = document.getElementById('btn-clear');
-
-function renderCart(){
-  if (cart.length === 0) {
-    cartEmptyEl.style.display = 'block';
-    cartItemsEl.style.display = 'none';
-    cartTotalRowEl.style.display = 'none';
-    btnOrder.disabled = true;
-    btnClear.disabled = true;
-    return;
-  }
-
-  cartEmptyEl.style.display = 'none';
-  cartItemsEl.style.display = 'block';
-  cartTotalRowEl.style.display = 'flex';
-  btnOrder.disabled = false;
-  btnClear.disabled = false;
-
-  cartItemsEl.innerHTML = '';
-  let total = 0;
-
-  cart.forEach(item => {
-    const li = document.createElement('li');
-    li.innerHTML = `<span>${item.name}</span><span>${item.price} RON</span>`;
-    cartItemsEl.appendChild(li);
-    total += item.price;
-  });
-
-  cartTotalEl.textContent = total + ' RON';
-}
-
-// „Kosárba” gombok
-document.querySelectorAll('.btn-add-cart').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const key = btn.getAttribute('data-pkg');
-    const cfg = packageConfig[key];
-    if (!cfg) return;
-
-    const name = texts[currentLang][cfg.nameKey] || 'Csomag';
-    const price = cfg.price || 0;
-
-    cart.push({ name, price });
-    renderCart();
-  });
-});
-
-// Kosár ürítése
-btnClear.addEventListener('click', () => {
-  cart.length = 0;
-  renderCart();
-});
-
-// Rendelés e-mailben – mailto
-btnOrder.addEventListener('click', () => {
-  if (cart.length === 0) return;
-
-  const t = texts[currentLang];
-
-  let bodyLines = [];
-  bodyLines.push(t["order-email-greeting"]);
-  bodyLines.push('');
-  bodyLines.push(t["order-email-intro"]);
-  bodyLines.push('');
-
-  let total = 0;
-  cart.forEach(item => {
-    const line = '- ' + item.name + (item.price > 0 ? ' (' + item.price + ' RON)' : ' (egyedi ár / preț personalizat)');
-    bodyLines.push(line);
-    total += item.price;
-  });
-
-  bodyLines.push('');
-  bodyLines.push(t["order-email-total"] + ' ' + total + ' RON');
-  bodyLines.push('');
-  bodyLines.push(t["order-email-contact-label"]);
-  bodyLines.push('');
-  bodyLines.push(t["order-email-name"]);
-  bodyLines.push(t["order-email-phone"]);
-  bodyLines.push(t["order-email-email"]);
-
-  const subject = t["order-email-subject"];
-  const body = bodyLines.join('\n');
-
-  const mailto = 'mailto:norbertnagy9898@yahoo.com'
-               + '?subject=' + encodeURIComponent(subject)
-               + '&body=' + encodeURIComponent(body);
-
-  window.location.href = mailto;
-});
-
-// alapértelmezett: magyar
+/* init */
 setLanguage('hu');
 
 document.getElementById('btn-hu').addEventListener('click', () => setLanguage('hu'));
 document.getElementById('btn-ro').addEventListener('click', () => setLanguage('ro'));
 </script>
-
 </body>
 </html>

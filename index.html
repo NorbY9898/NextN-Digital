@@ -914,6 +914,7 @@
           norby9898.github.io/partizan-security
         </a>
       </div>
+
       <div class="example-card">
         <div class="example-top" data-i18n="example2-top"></div>
         <div class="example-name" data-i18n="example2-name"></div>
@@ -921,6 +922,15 @@
           norby9898.github.io/nsport-web
         </a>
       </div>
+
+      <div class="example-card">
+        <div class="example-top" data-i18n="example4-top"></div>
+        <div class="example-name" data-i18n="example4-name"></div>
+        <a class="example-link" href="https://norby9898.github.io/Adnrea-b-f-miniweb/" target="_blank" rel="noopener">
+          norby9898.github.io/Adnrea-b-f-miniweb
+        </a>
+      </div>
+
       <div class="example-card">
         <div class="example-top" data-i18n="example3-top"></div>
         <div class="example-name" data-i18n="example3-name"></div>
@@ -938,7 +948,6 @@
     </div>
 
     <div class="offers">
-      <!-- ALAP -->
       <div class="offer-card">
         <span class="offer-tag" data-i18n="offer1-tag"></span>
         <div class="offer-name" data-i18n="offer1-name"></div>
@@ -953,7 +962,6 @@
         </div>
       </div>
 
-      <!-- LEGNEPSZERŰBB -->
       <div class="offer-card">
         <span class="offer-tag" data-i18n="offer2-tag"></span>
         <div class="offer-name" data-i18n="offer2-name"></div>
@@ -968,7 +976,6 @@
         </div>
       </div>
 
-      <!-- EGYEDI -->
       <div class="offer-card">
         <span class="offer-tag" data-i18n="offer3-tag"></span>
         <div class="offer-name" data-i18n="offer3-name"></div>
@@ -1055,9 +1062,6 @@
 </main>
 
 <script>
-/* ==========================
-   NYELV + SZÖVEGEK
-   ========================== */
 let currentLang = 'hu';
 
 const texts = {
@@ -1113,6 +1117,8 @@ const texts = {
     "example1-name": "Partizan Security",
     "example2-top": "Sportbolt – mini market oldal",
     "example2-name": "Nsport Oradea",
+    "example4-top": "Vendéglátás – mini weboldal",
+    "example4-name": "Andrea Büfé",
     "example3-top": "Kombinált megoldás",
     "example3-name": "QR profil + részletes oldal",
     "example3-text": "QR névjegyről egy kattintással átnyit a részletes, termékeket vagy szolgáltatásokat bemutató mini weboldalra.",
@@ -1217,6 +1223,8 @@ const texts = {
     "example1-name": "Partizan Security",
     "example2-top": "Magazin sport – mini market",
     "example2-name": "Nsport Oradea",
+    "example4-top": "HoReCa – mini site",
+    "example4-name": "Andrea Büfé",
     "example3-top": "Soluție combinată",
     "example3-name": "Profil cu QR + mini site",
     "example3-text": "Din cardul de vizită cu QR clientul ajunge printr-un click la un mini site cu produse sau servicii detaliate.",
@@ -1270,9 +1278,6 @@ const texts = {
   }
 };
 
-/* ==========================
-   AJÁNLATKÉRÉS E-MAIL
-   ========================== */
 const EMAIL_TO = "norbertnagy9898@yahoo.com";
 
 const offerMail = {
@@ -1397,9 +1402,6 @@ function refreshOfferButtons(){
   );
 }
 
-/* ==========================
-   NYELVÁLLÍTÁS
-   ========================== */
 function setLanguage(lang) {
   const map = texts[lang];
   if (!map) return;
@@ -1420,7 +1422,6 @@ function setLanguage(lang) {
   refreshOfferButtons();
 }
 
-/* init */
 setLanguage('hu');
 
 document.getElementById('btn-hu').addEventListener('click', () => setLanguage('hu'));

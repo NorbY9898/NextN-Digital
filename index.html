@@ -5,155 +5,272 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NextN-Digital – QR névjegykártya & mini weboldal</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
+    :root{
+      --bg:#060606;
+      --bg2:#0d0d0d;
+      --panel:rgba(12,12,12,.88);
+      --panel-2:rgba(18,18,18,.94);
+      --line:rgba(255,255,255,.08);
+      --gold-line:rgba(255,215,0,.36);
+      --gold-line-strong:rgba(255,215,0,.62);
+      --text:#f7f7f7;
+      --muted:rgba(255,255,255,.74);
+      --muted-2:rgba(255,255,255,.56);
+      --gold:#FFD700;
+      --gold-soft:#FFE88A;
+      --gold-deep:#C8A200;
+      --shadow:0 24px 70px rgba(0,0,0,.42);
+      --glow:0 0 24px rgba(255,215,0,.12);
+      --radius:24px;
+      --max:1180px;
+    }
+
     *{
       box-sizing:border-box;
       margin:0;
       padding:0;
-      font-family:Arial, sans-serif;
     }
 
+    html{ scroll-behavior:smooth; }
+
     body{
-      background:radial-gradient(circle at top,#2b2b2b,#050505);
-      color:#f7f7f7;
+      background:
+        radial-gradient(1000px 520px at 50% -10%, rgba(255,215,0,.10), transparent 55%),
+        radial-gradient(900px 460px at 0% 100%, rgba(255,215,0,.04), transparent 60%),
+        linear-gradient(180deg, #060606 0%, #0c0c0c 35%, #050505 100%);
+      color:var(--text);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      letter-spacing:.1px;
     }
 
     a{text-decoration:none;color:inherit;}
 
     .wrapper{
-      max-width:1100px;
+      width:min(var(--max), calc(100% - 32px));
       margin:0 auto;
-      padding:0 16px 40px;
     }
 
-    .accent{ color:#FFD700; }
+    .accent{ color:var(--gold); }
 
-    /* NAV */
+    /* =========================
+       NAV
+       ========================= */
     header{
       position:sticky;
       top:0;
-      z-index:10;
-      background:rgba(5,5,5,0.96);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid rgba(255,215,0,0.35);
-      box-shadow:0 4px 18px rgba(0,0,0,0.7);
+      z-index:50;
+      backdrop-filter:blur(14px);
+      background:rgba(5,5,5,.80);
+      border-bottom:1px solid rgba(255,255,255,.07);
     }
+    header::after{
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:-1px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,215,0,.9), transparent);
+      opacity:.9;
+    }
+
     .nav{
+      min-height:78px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:10px 0;
-      gap:12px;
+      padding:12px 0;
+      gap:14px;
     }
 
     .nav-brand{
       display:flex;
       align-items:center;
-      gap:8px;
-      min-width:190px;
+      gap:10px;
+      min-width:220px;
     }
 
     .nav-logo{
-      height:26px;
+      height:34px;
       width:auto;
       display:block;
-      border-radius:6px;
+      border-radius:8px;
+      box-shadow:0 0 12px rgba(255,215,0,.18);
     }
 
     .logo-text{
-      font-weight:bold;
-      letter-spacing:1px;
-      color:#FFD700;
+      font-family:"Cormorant Garamond", serif;
+      font-size:30px;
+      line-height:1;
+      font-weight:700;
+      letter-spacing:.08em;
+      color:var(--gold);
       text-transform:uppercase;
-      font-size:0.95rem;
       white-space:nowrap;
     }
 
     .nav-center{
       display:flex;
-      flex:1;
+      flex:1 1 auto;
       justify-content:center;
     }
+
     .nav-links{
       display:flex;
-      gap:18px;
-      font-size:0.9rem;
+      gap:22px;
       flex-wrap:wrap;
       justify-content:center;
-    }
-    .nav-links a{ opacity:0.85; }
-    .nav-links a:hover{
-      opacity:1;
-      color:#FFE88A;
-    }
-
-    /* Nyelvválasztó */
-    .lang-switch{
-      display:flex;
-      gap:6px;
-      min-width:110px;
-      justify-content:flex-end;
-    }
-    .lang-btn{
-      border-radius:999px;
-      padding:4px 9px;
-      font-size:0.75rem;
-      border:1px solid rgba(255,215,0,0.4);
-      background:rgba(10,10,10,0.95);
-      color:#f5f5f5;
-      cursor:pointer;
-    }
-    .lang-btn.active{
-      background:#FFD700;
-      color:#201500;
-      font-weight:bold;
-      box-shadow:0 0 10px rgba(255,215,0,0.8);
-      border-color:#FFD700;
-    }
-
-    /* HERO */
-    .hero{
-      padding:40px 0 32px;
-      display:grid;
-      grid-template-columns:1.2fr 1fr;
-      gap:32px;
       align-items:center;
     }
 
-    @media (max-width: 800px){
-      .hero{
-        grid-template-columns:1fr;
-        text-align:center;
-      }
-      .nav{ flex-wrap:wrap; }
-      .nav-center{ order:3; width:100%; }
-      .nav-brand{ justify-content:center; width:100%; }
-      .lang-switch{ justify-content:center; width:100%; }
+    .nav-links a{
+      position:relative;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      color:rgba(255,255,255,.74);
+      padding:10px 8px;
+      transition:.2s ease;
+    }
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:8px; right:8px; bottom:4px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,215,0,.96), transparent);
+      opacity:0;
+      transform:translateY(4px);
+      transition:.25s ease;
+    }
+    .nav-links a:hover{
+      color:#fff;
+    }
+    .nav-links a:hover::after{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .lang-switch{
+      display:flex;
+      gap:8px;
+      min-width:120px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+
+    .lang-btn{
+      height:40px;
+      min-width:48px;
+      padding:0 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,215,0,.36);
+      background:rgba(255,255,255,.03);
+      color:#f5f5f5;
+      cursor:pointer;
+      transition:.2s ease;
+      font-size:.78rem;
+      font-weight:600;
+    }
+    .lang-btn:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,215,0,.72);
+      box-shadow:0 10px 24px rgba(0,0,0,.18), 0 0 18px rgba(255,215,0,.10);
+    }
+    .lang-btn.active{
+      background:var(--gold);
+      color:#1f1600;
+      font-weight:bold;
+      border-color:var(--gold);
+      box-shadow:0 0 14px rgba(255,215,0,.42);
+    }
+
+    /* =========================
+       HERO
+       ========================= */
+    .hero{
+      padding:28px 0 18px;
+      display:grid;
+      grid-template-columns:1.15fr .95fr;
+      gap:26px;
+      align-items:stretch;
+    }
+
+    .hero-left{
+      position:relative;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:28px;
+      overflow:hidden;
+      min-height:460px;
+      background:
+        radial-gradient(800px 420px at 50% 0%, rgba(255,215,0,.10), transparent 60%),
+        linear-gradient(180deg, rgba(17,17,17,.96), rgba(7,7,7,.98));
+      box-shadow:var(--shadow), var(--glow);
+      display:flex;
+      align-items:center;
+    }
+
+    .hero-left::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(900px 450px at 20% 20%, rgba(255,215,0,.05), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+      pointer-events:none;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:1;
+      width:100%;
+      padding:40px 34px;
+    }
+
+    .hero-kicker{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.24em;
+      color:rgba(255,255,255,.62);
+      margin-bottom:12px;
     }
 
     .hero-title{
-      font-size:2.3rem;
-      margin-bottom:12px;
-      line-height:1.15;
+      font-family:"Cormorant Garamond", serif;
+      font-size:58px;
+      line-height:.98;
+      font-weight:700;
+      margin-bottom:14px;
+      letter-spacing:.02em;
+      color:#fff;
     }
+
     .hero-sub{
-      font-size:1rem;
-      color:#d6d6d6;
-      margin-bottom:20px;
+      font-size:14px;
+      line-height:1.85;
+      color:rgba(255,255,255,.76);
+      margin-bottom:18px;
+      max-width:720px;
     }
+
     .hero-badges{
       display:flex;
       gap:8px;
       flex-wrap:wrap;
-      margin-bottom:20px;
+      margin-bottom:18px;
     }
+
     .badge{
-      font-size:0.75rem;
-      padding:4px 9px;
+      font-size:11px;
+      padding:7px 11px;
       border-radius:999px;
-      border:1px solid rgba(255,215,0,0.7);
-      color:#FFE88A;
-      background:rgba(10,10,10,0.85);
+      border:1px solid rgba(255,215,0,.46);
+      color:var(--gold-soft);
+      background:rgba(255,255,255,.03);
+      text-transform:uppercase;
+      letter-spacing:.10em;
     }
 
     .hero-cta{
@@ -161,290 +278,331 @@
       flex-wrap:wrap;
       gap:10px;
     }
-    .btn-primary{
-      background:linear-gradient(135deg,#FFE48A,#C8A200);
-      color:#211600;
-      padding:10px 18px;
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-offer{
+      min-height:44px;
+      padding:0 18px;
       border-radius:999px;
-      font-weight:bold;
-      font-size:0.95rem;
-      border:none;
-      cursor:pointer;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
       display:inline-flex;
       align-items:center;
-      gap:6px;
-      box-shadow:0 0 18px rgba(255,215,0,0.85);
+      justify-content:center;
+      gap:8px;
+      transition:.22s ease;
+      cursor:pointer;
+      white-space:nowrap;
     }
+
+    .btn-primary{
+      background:linear-gradient(135deg, #FFE48A, #C8A200);
+      color:#211600;
+      font-weight:700;
+      box-shadow:0 12px 28px rgba(0,0,0,.18), 0 0 16px rgba(255,215,0,.18);
+      border:none;
+    }
+    .btn-primary:hover{
+      filter:brightness(1.06);
+      transform:translateY(-1px);
+    }
+
     .btn-secondary{
-      border-radius:999px;
-      padding:9px 16px;
-      border:1px solid rgba(180,180,180,0.7);
-      font-size:0.9rem;
-      background:rgba(10,10,10,0.9);
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.03);
       color:#f0f0f0;
     }
-    .btn-primary:hover{ filter:brightness(1.05); }
-    .btn-secondary:hover{ border-color:#FFD700; }
+    .btn-secondary:hover{
+      border-color:rgba(255,215,0,.56);
+      background:rgba(255,215,0,.07);
+      transform:translateY(-1px);
+    }
 
-    /* ÚJ: e-mail ajánlatkérés gomb (kosár helyett) */
     .btn-offer{
-      border-radius:999px;
-      padding:10px 18px;
-      border:1px solid rgba(255,215,0,0.7);
-      background:rgba(10,10,10,0.92);
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      color:#FFE88A;
-      font-weight:bold;
-      font-size:0.92rem;
-      box-shadow:0 0 14px rgba(255,215,0,0.25);
+      border:1px solid rgba(255,215,0,.56);
+      background:rgba(255,255,255,.03);
+      color:var(--gold-soft);
+      font-weight:700;
+      box-shadow:0 0 14px rgba(255,215,0,.10);
     }
     .btn-offer:hover{
-      border-color:#FFD700;
-      box-shadow:0 0 18px rgba(255,215,0,0.35);
+      border-color:var(--gold);
+      box-shadow:0 0 18px rgba(255,215,0,.18);
+      transform:translateY(-1px);
     }
 
     .hero-card{
-      border-radius:22px;
-      background:radial-gradient(circle at top,#232323,#050505);
-      border:1px solid rgba(255,215,0,0.7);
-      box-shadow:
-        0 0 22px rgba(0,0,0,0.9),
-        0 0 26px rgba(255,215,0,0.4);
-      padding:20px 18px 18px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(700px 380px at 50% 0%, rgba(255,215,0,.10), transparent 60%),
+        linear-gradient(180deg, rgba(15,15,15,.96), rgba(8,8,8,.98));
+      box-shadow:var(--shadow), var(--glow);
+      padding:22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
+
     .hero-mini{
       width:100%;
-      border-radius:16px;
-      border:1px solid rgba(255,215,0,0.8);
-      padding:16px 12px 14px;
-      background:linear-gradient(140deg,#141414,#050505);
+      max-width:360px;
+      border-radius:22px;
+      border:1px solid rgba(255,215,0,.48);
+      padding:22px 16px 18px;
+      background:linear-gradient(180deg, rgba(22,22,22,.96), rgba(6,6,6,.98));
       text-align:center;
-      margin-bottom:10px;
+      box-shadow:0 16px 34px rgba(0,0,0,.25), 0 0 18px rgba(255,215,0,.10);
     }
+
     .hero-mini-logo{
-      width:80px;
-      height:80px;
-      border-radius:18px;
-      border:2px solid #FFD700;
-      margin:0 auto 10px;
+      width:90px;
+      height:90px;
+      border-radius:20px;
+      border:1px solid rgba(255,215,0,.72);
+      margin:0 auto 12px;
       display:flex;
       align-items:center;
       justify-content:center;
       background:#000;
-      color:#FFD700;
+      color:var(--gold);
       font-weight:bold;
-      font-size:0.8rem;
-      box-shadow:0 0 16px rgba(255,215,0,0.6);
+      font-size:0.82rem;
+      box-shadow:0 0 18px rgba(255,215,0,.22);
     }
+
+    .hero-mini-name{
+      font-family:"Cormorant Garamond", serif;
+      font-size:28px;
+      line-height:1;
+      color:#fff;
+      margin-bottom:6px;
+      letter-spacing:.05em;
+    }
+
+    .hero-mini-desc{
+      font-size:13px;
+      color:#c7c7c7;
+      line-height:1.6;
+    }
+
     .hero-mini-buttons{
       display:flex;
       justify-content:center;
       gap:8px;
-      margin-top:8px;
+      margin-top:14px;
       flex-wrap:wrap;
     }
+
     .mini-btn{
-      width:34px;
-      height:34px;
-      border-radius:10px;
-      border:1px solid rgba(255,215,0,0.9);
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      border:1px solid rgba(255,215,0,.62);
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:0.75rem;
-      color:#FFE88A;
-      background:rgba(0,0,0,0.9);
-    }
-    .hero-note{
-      font-size:0.75rem;
-      color:#b5b5b5;
-      margin-top:6px;
-      text-align:center;
+      font-size:0.76rem;
+      color:var(--gold-soft);
+      background:rgba(0,0,0,.88);
+      box-shadow:0 0 12px rgba(255,215,0,.08);
     }
 
-    /* SECTIONS */
-    section{ padding:28px 0 8px; }
-    h2.section-title{
-      font-size:1.6rem;
-      margin-bottom:12px;
+    .hero-note{
+      font-size:12px;
+      color:#b5b5b5;
+      margin-top:12px;
+      text-align:center;
+      line-height:1.6;
     }
-    .section-sub{
-      font-size:0.95rem;
-      color:#d0d0d0;
+
+    /* =========================
+       SECTION HEAD
+       ========================= */
+    section{
+      padding:28px 0 8px;
+    }
+
+    .section-header{
+      text-align:center;
       margin-bottom:18px;
     }
 
-    /* HOW IT WORKS */
-    .steps{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:16px;
-    }
-    .step{
-      background:rgba(10,10,10,0.92);
-      padding:14px 14px 16px;
-      border-radius:14px;
-      border:1px solid #2b2b2b;
-      box-shadow:0 0 10px rgba(0,0,0,0.7);
-    }
-    .step-title{
-      font-weight:bold;
-      margin-bottom:6px;
-      color:#FFE88A;
-    }
-    .step-num{
-      font-size:0.75rem;
-      opacity:0.9;
-      margin-bottom:2px;
-      color:#bfbfbf;
-    }
-    .step p{
-      font-size:0.86rem;
-      color:#e2e2e2;
+    .section-kicker{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.24em;
+      color:rgba(255,255,255,.54);
+      margin-bottom:8px;
     }
 
-    /* BENEFITS */
-    .benefits{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-      gap:16px;
-    }
-    .benefit{
-      background:rgba(8,8,8,0.96);
-      border-radius:14px;
-      border:1px solid #262626;
-      padding:14px;
-      box-shadow:0 0 12px rgba(0,0,0,0.85);
-    }
-    .benefit h3{
-      font-size:1rem;
-      margin-bottom:6px;
-      color:#FFE88A;
-    }
-    .benefit p{
-      font-size:0.86rem;
-      color:#e0e0e0;
+    h2.section-title{
+      font-family:"Cormorant Garamond", serif;
+      font-size:38px;
+      font-weight:700;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      color:#fff;
+      margin-bottom:8px;
     }
 
-    /* EXAMPLES */
-    .examples{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:16px;
-    }
-    .example-card{
-      background:rgba(10,10,10,0.94);
-      border-radius:14px;
-      border:1px solid #2a2a2a;
-      padding:14px;
-      box-shadow:0 0 12px rgba(0,0,0,0.75);
-    }
-    .example-top{
-      font-size:0.8rem;
-      color:#b3b3b3;
-      margin-bottom:6px;
-    }
-    .example-name{
-      font-weight:bold;
-      margin-bottom:6px;
-      color:#FFE88A;
-    }
-    .example-link{
-      font-size:0.85rem;
-      color:#FFD700;
-      word-break:break-all;
+    .section-sub{
+      font-size:14px;
+      color:#d0d0d0;
+      line-height:1.7;
+      max-width:820px;
+      margin:0 auto;
     }
 
-    /* ÚJ: AJÁNLATKÉRÉS (árak/kosár helyett) */
+    /* =========================
+       CARDS / GRIDS
+       ========================= */
+    .steps,
+    .benefits,
+    .examples,
     .offers{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:16px;
+      gap:18px;
     }
-    .offer-card{
-      background:rgba(7,7,7,0.96);
-      border-radius:14px;
-      border:1px solid rgba(255,215,0,0.6);
-      padding:16px;
+
+    .step,
+    .benefit,
+    .example-card,
+    .offer-card,
+    .contact-box,
+    .video-card{
       position:relative;
       overflow:hidden;
-      box-shadow:
-        0 0 18px rgba(0,0,0,0.9),
-        0 0 18px rgba(255,215,0,0.25);
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02)),
+        rgba(10,10,10,.96);
+      box-shadow:var(--shadow), 0 0 16px rgba(255,215,0,.06);
     }
+
+    .step::before,
+    .benefit::before,
+    .example-card::before,
+    .offer-card::before,
+    .contact-box::before,
+    .video-card::before{
+      content:"";
+      position:absolute;
+      left:18px; right:18px; top:0;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,215,0,.86), transparent);
+      opacity:.95;
+    }
+
+    .step,
+    .benefit,
+    .example-card,
+    .offer-card{
+      padding:18px 16px 18px;
+    }
+
+    .step-num,
+    .example-top{
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:#a9a9a9;
+      margin-bottom:6px;
+    }
+
+    .step-title,
+    .benefit h3,
+    .example-name,
+    .offer-name{
+      font-family:"Cormorant Garamond", serif;
+      font-size:28px;
+      line-height:1.05;
+      margin-bottom:10px;
+      color:var(--gold-soft);
+      letter-spacing:.04em;
+    }
+
+    .step p,
+    .benefit p,
+    .offer-desc,
+    .contact-text,
+    .video-sub,
+    .video-note{
+      font-size:14px;
+      line-height:1.75;
+      color:#e2e2e2;
+    }
+
+    .example-link{
+      font-size:13px;
+      color:var(--gold);
+      word-break:break-all;
+      line-height:1.7;
+    }
+
+    /* =========================
+       OFFER CARDS
+       ========================= */
     .offer-tag{
       position:absolute;
-      right:12px;
-      top:10px;
-      font-size:0.7rem;
-      padding:2px 8px;
+      right:14px;
+      top:12px;
+      font-size:10px;
+      padding:5px 9px;
       border-radius:999px;
-      background:#FFD700;
+      background:var(--gold);
       color:#221700;
-      font-weight:bold;
+      font-weight:800;
       text-transform:uppercase;
+      letter-spacing:.12em;
+      box-shadow:0 0 10px rgba(255,215,0,.20);
     }
-    .offer-name{
-      font-weight:bold;
-      margin-bottom:6px;
-      font-size:1rem;
-    }
-    .offer-desc{
-      font-size:0.88rem;
-      color:#e0e0e0;
-      margin-bottom:10px;
-    }
+
     .offer-list{
-      font-size:0.82rem;
+      font-size:13px;
       color:#d8d8d8;
-      margin-left:14px;
+      margin-left:18px;
+      line-height:1.8;
+      margin-top:10px;
     }
+
     .offer-actions{
-      margin-top:12px;
+      margin-top:16px;
       display:flex;
       justify-content:flex-end;
     }
 
-    /* VIDEO */
+    /* =========================
+       VIDEO
+       ========================= */
     .video-card{
-      margin-top:10px;
-      border-radius:18px;
-      background:rgba(8,8,8,0.97);
-      border:1px solid rgba(255,215,0,0.65);
-      box-shadow:
-        0 0 16px rgba(0,0,0,0.9),
-        0 0 18px rgba(255,215,0,0.2);
-      padding:16px;
-    }
-    .video-title{
-      font-size:1.25rem;
-      margin-bottom:6px;
-      color:#FFE88A;
-      font-weight:bold;
-    }
-    .video-sub{
-      font-size:0.95rem;
-      color:#d6d6d6;
-      margin-bottom:12px;
-    }
-    .video-wrap{
-      width:100%;
-      border-radius:14px;
-      overflow:hidden;
-      border:1px solid rgba(255,215,0,0.5);
-      background:#000;
-      /* mobilon is szép arány */
-      aspect-ratio: 16 / 9;
+      padding:20px;
     }
 
-    /* régi video tag maradhatna, de YouTube-nál iframe kell */
+    .video-title{
+      font-family:"Cormorant Garamond", serif;
+      font-size:34px;
+      line-height:1.05;
+      color:var(--gold-soft);
+      margin-bottom:8px;
+      letter-spacing:.04em;
+    }
+
+    .video-wrap{
+      width:100%;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,215,0,.42);
+      background:#000;
+      aspect-ratio:16 / 9;
+      margin-top:14px;
+      box-shadow:0 16px 34px rgba(0,0,0,.24);
+    }
+
     .video-wrap iframe{
       width:100%;
       height:100%;
@@ -453,50 +611,166 @@
     }
 
     .video-note{
-      margin-top:10px;
-      font-size:0.8rem;
+      margin-top:12px;
       color:#b8b8b8;
-      line-height:1.45;
     }
 
-    /* CONTACT */
+    /* =========================
+       CONTACT
+       ========================= */
     .contact-grid{
       display:grid;
       grid-template-columns:1.1fr 1fr;
       gap:20px;
       align-items:flex-start;
     }
-    @media (max-width:800px){
-      .contact-grid{ grid-template-columns:1fr; }
-    }
+
     .contact-text{
-      font-size:0.9rem;
       color:#e4e4e4;
     }
-    .contact-box{
-      background:rgba(8,8,8,0.97);
-      border-radius:14px;
-      border:1px solid rgba(255,215,0,0.6);
-      padding:14px;
-      box-shadow:0 0 16px rgba(0,0,0,0.85);
+
+    .contact-main-card{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02)),
+        rgba(10,10,10,.96);
+      box-shadow:var(--shadow), 0 0 16px rgba(255,215,0,.06);
+      padding:20px;
+      position:relative;
+      overflow:hidden;
     }
+    .contact-main-card::before{
+      content:"";
+      position:absolute;
+      left:18px; right:18px; top:0;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,215,0,.86), transparent);
+    }
+
+    .contact-box{
+      padding:18px 16px;
+    }
+
     .contact-buttons{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin-top:10px;
-    }
-    .contact-small{
-      font-size:0.8rem;
-      color:#b3b3b3;
-      margin-top:6px;
+      margin-top:14px;
     }
 
+    .contact-small{
+      font-size:12px;
+      color:#b3b3b3;
+      margin-top:10px;
+      line-height:1.6;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
     footer{
       text-align:center;
-      font-size:0.75rem;
+      font-size:12px;
       color:#8a8a8a;
-      padding:16px 0 0;
+      padding:24px 0 30px;
+      border-top:1px solid rgba(255,255,255,.07);
+      margin-top:20px;
+    }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+    @media (max-width: 900px){
+      .hero{
+        grid-template-columns:1fr;
+      }
+
+      .nav{
+        flex-wrap:wrap;
+      }
+      .nav-center{
+        order:3;
+        width:100%;
+      }
+      .nav-brand{
+        justify-content:center;
+        width:100%;
+      }
+      .lang-switch{
+        justify-content:center;
+        width:100%;
+      }
+      .contact-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 700px){
+      .wrapper{
+        width:min(100%, calc(100% - 22px));
+      }
+
+      .logo-text{
+        font-size:24px;
+      }
+
+      .hero-left,
+      .hero-card{
+        border-radius:24px;
+      }
+
+      .hero-content{
+        padding:28px 18px;
+      }
+
+      .hero-title{
+        font-size:40px;
+      }
+
+      h2.section-title{
+        font-size:30px;
+      }
+
+      .step-title,
+      .benefit h3,
+      .example-name,
+      .offer-name,
+      .video-title{
+        font-size:24px;
+      }
+
+      .hero-cta,
+      .contact-buttons{
+        justify-content:center;
+      }
+
+      .hero-sub{
+        font-size:13px;
+      }
+    }
+
+    @media (max-width: 480px){
+      .hero-title{
+        font-size:34px;
+      }
+
+      h2.section-title{
+        font-size:26px;
+      }
+
+      .btn-primary,
+      .btn-secondary,
+      .btn-offer{
+        width:100%;
+      }
+
+      .offer-actions{
+        justify-content:stretch;
+      }
+      .offer-actions .btn-offer{
+        width:100%;
+      }
     }
   </style>
 </head>
@@ -506,7 +780,6 @@
   <div class="wrapper nav">
 
     <div class="nav-brand">
-      <!-- TODO: ide a saját logód fájlneve -->
       <img src="logo.png" alt="NextN-Digital logó" class="nav-logo" />
       <span class="logo-text" data-i18n="logo-text">NextN-Digital</span>
     </div>
@@ -533,24 +806,27 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div>
-      <h1 class="hero-title" data-i18n="hero-title"></h1>
-      <p class="hero-sub" data-i18n="hero-sub"></p>
+    <div class="hero-left">
+      <div class="hero-content">
+        <div class="hero-kicker" data-i18n="hero-kicker">Prémium digitális megjelenés vállalkozásoknak</div>
+        <h1 class="hero-title" data-i18n="hero-title"></h1>
+        <p class="hero-sub" data-i18n="hero-sub"></p>
 
-      <div class="hero-badges">
-        <span class="badge" data-i18n="badge1"></span>
-        <span class="badge" data-i18n="badge2"></span>
-        <span class="badge" data-i18n="badge3"></span>
-      </div>
+        <div class="hero-badges">
+          <span class="badge" data-i18n="badge1"></span>
+          <span class="badge" data-i18n="badge2"></span>
+          <span class="badge" data-i18n="badge3"></span>
+        </div>
 
-      <div class="hero-cta">
-        <a class="btn-primary"
-           href="https://wa.me/40745326270?text=Szia,%20QR%20névjegykártyát%20és%20mini%20weboldalt%20szeretnék."
-           target="_blank"
-           rel="noopener"
-           data-i18n="hero-cta-primary"></a>
+        <div class="hero-cta">
+          <a class="btn-primary"
+             href="https://wa.me/40745326270?text=Szia,%20QR%20névjegykártyát%20és%20mini%20weboldalt%20szeretnék."
+             target="_blank"
+             rel="noopener"
+             data-i18n="hero-cta-primary"></a>
 
-        <a class="btn-secondary" href="#examples" data-i18n="hero-cta-secondary"></a>
+          <a class="btn-secondary" href="#examples" data-i18n="hero-cta-secondary"></a>
+        </div>
       </div>
     </div>
 
@@ -558,8 +834,8 @@
     <div class="hero-card">
       <div class="hero-mini">
         <div class="hero-mini-logo" data-i18n="preview-logo">LOGÓ</div>
-        <div style="font-size:0.9rem;margin-bottom:2px;" data-i18n="preview-name">Cég neve</div>
-        <div style="font-size:0.75rem;color:#c7c7c7;" data-i18n="preview-desc"></div>
+        <div class="hero-mini-name" data-i18n="preview-name">Cég neve</div>
+        <div class="hero-mini-desc" data-i18n="preview-desc"></div>
         <div class="hero-mini-buttons">
           <div class="mini-btn">F</div>
           <div class="mini-btn">IG</div>
@@ -567,15 +843,18 @@
           <div class="mini-btn">📞</div>
           <div class="mini-btn">✉️</div>
         </div>
+        <p class="hero-note" data-i18n="preview-note"></p>
       </div>
-      <p class="hero-note" data-i18n="preview-note"></p>
     </div>
   </section>
 
   <!-- HOGYAN MŰKÖDIK -->
   <section id="how">
-    <h2 class="section-title" data-i18n="how-title"></h2>
-    <p class="section-sub" data-i18n="how-sub"></p>
+    <div class="section-header">
+      <div class="section-kicker" data-i18n="how-kicker">Egyszerű folyamat</div>
+      <h2 class="section-title" data-i18n="how-title"></h2>
+      <p class="section-sub" data-i18n="how-sub"></p>
+    </div>
 
     <div class="steps">
       <div class="step">
@@ -598,7 +877,11 @@
 
   <!-- ELŐNYÖK -->
   <section>
-    <h2 class="section-title" data-i18n="benefits-title"></h2>
+    <div class="section-header">
+      <div class="section-kicker" data-i18n="benefits-kicker">Miért éri meg?</div>
+      <h2 class="section-title" data-i18n="benefits-title"></h2>
+    </div>
+
     <div class="benefits">
       <div class="benefit">
         <h3 data-i18n="benefit1-title"></h3>
@@ -617,8 +900,11 @@
 
   <!-- PÉLDÁK -->
   <section id="examples">
-    <h2 class="section-title" data-i18n="examples-title"></h2>
-    <p class="section-sub" data-i18n="examples-sub"></p>
+    <div class="section-header">
+      <div class="section-kicker" data-i18n="examples-kicker">Élő minták</div>
+      <h2 class="section-title" data-i18n="examples-title"></h2>
+      <p class="section-sub" data-i18n="examples-sub"></p>
+    </div>
 
     <div class="examples">
       <div class="example-card">
@@ -638,15 +924,18 @@
       <div class="example-card">
         <div class="example-top" data-i18n="example3-top"></div>
         <div class="example-name" data-i18n="example3-name"></div>
-        <p style="font-size:0.85rem;color:#ddd;margin-top:4px;" data-i18n="example3-text"></p>
+        <p style="font-size:14px;color:#ddd;margin-top:6px;line-height:1.7;" data-i18n="example3-text"></p>
       </div>
     </div>
   </section>
 
-  <!-- AJÁNLATKÉRÉS (ÁRAK/KOSÁR HELYETT) -->
+  <!-- AJÁNLATKÉRÉS -->
   <section id="offers">
-    <h2 class="section-title" data-i18n="offers-title"></h2>
-    <p class="section-sub" data-i18n="offers-sub"></p>
+    <div class="section-header">
+      <div class="section-kicker" data-i18n="offers-kicker">Rugalmas megoldások</div>
+      <h2 class="section-title" data-i18n="offers-title"></h2>
+      <p class="section-sub" data-i18n="offers-sub"></p>
+    </div>
 
     <div class="offers">
       <!-- ALAP -->
@@ -696,21 +985,26 @@
     </div>
   </section>
 
-  <!-- VIDEÓ A LAP ALJÁN -->
+  <!-- VIDEÓ -->
   <section id="video">
-    <h2 class="section-title" data-i18n="video-section-title"></h2>
+    <div class="section-header">
+      <div class="section-kicker" data-i18n="video-kicker">Rövid bemutató</div>
+      <h2 class="section-title" data-i18n="video-section-title"></h2>
+    </div>
 
     <div class="video-card">
       <div class="video-title" data-i18n="video-title"></div>
       <div class="video-sub" data-i18n="video-sub"></div>
 
       <div class="video-wrap">
-        <!-- ✅ YouTube beágyazás (a te linkedből) -->
         <iframe
-          src="https://www.youtube.com/embed/PNRaHAPwyg0"
-          title="YouTube video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen>
+          src="https://www.youtube-nocookie.com/embed/PNRaHAPwyg0?rel=0&modestbranding=1&playsinline=1"
+          width="100%"
+          height="420"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin">
         </iframe>
       </div>
 
@@ -720,21 +1014,26 @@
 
   <!-- KAPCSOLAT -->
   <section id="contact">
-    <h2 class="section-title" data-i18n="contact-title"></h2>
+    <div class="section-header">
+      <div class="section-kicker" data-i18n="contact-kicker">Írj bátran</div>
+      <h2 class="section-title" data-i18n="contact-title"></h2>
+    </div>
 
     <div class="contact-grid">
-      <div class="contact-text">
-        <p data-i18n="contact-main"></p>
-        <p style="margin-top:10px;" data-i18n="contact-list-intro"></p>
-        <ul class="offer-list">
-          <li data-i18n="contact-li1"></li>
-          <li data-i18n="contact-li2"></li>
-          <li data-i18n="contact-li3"></li>
-        </ul>
+      <div class="contact-main-card">
+        <div class="contact-text">
+          <p data-i18n="contact-main"></p>
+          <p style="margin-top:12px;" data-i18n="contact-list-intro"></p>
+          <ul class="offer-list">
+            <li data-i18n="contact-li1"></li>
+            <li data-i18n="contact-li2"></li>
+            <li data-i18n="contact-li3"></li>
+          </ul>
+        </div>
       </div>
 
       <div class="contact-box">
-        <div style="font-weight:bold;margin-bottom:6px;" data-i18n="contact-direct"></div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:28px;color:#FFE88A;margin-bottom:8px;letter-spacing:.04em;" data-i18n="contact-direct"></div>
         <div class="contact-buttons">
           <a class="btn-secondary" href="tel:+40745326270" data-i18n="contact-call"></a>
           <a class="btn-secondary" href="mailto:norbertnagy9898@yahoo.com" data-i18n="contact-email"></a>
@@ -771,6 +1070,7 @@ const texts = {
     "nav-video": "Videó",
     "nav-contact": "Kapcsolat",
 
+    "hero-kicker": "Prémium digitális megjelenés vállalkozásoknak",
     "hero-title": 'Prémium <span class="accent">QR névjegykártya</span> & mini weboldal vállalkozásoknak',
     "hero-sub": "Egyetlen QR-kóddal eléred: logó, elérhetőségek, közösségi média, mini webshop vagy szolgáltatás oldal. <br>Elegáns fekete–arany dizájn, ami első pillantásra bizalmat kelt.",
     "badge1": "Kisvállalkozásoknak",
@@ -784,6 +1084,7 @@ const texts = {
     "preview-desc": "QR-kódról megnyíló digitális névjegy",
     "preview-note": "Ilyen prémium felületet készítünk a te cégednek is – logóval, színekkel, linkekkel.",
 
+    "how-kicker": "Egyszerű folyamat",
     "how-title": "Hogyan működik?",
     "how-sub": "3 egyszerű lépés, és kész a QR névjegykártyád saját mini weboldallal.",
     "step1-num": "1. lépés",
@@ -796,6 +1097,7 @@ const texts = {
     "step3-title": "Használat és módosítás",
     "step3-text": "A QR-kód akármeddig érvényes, nem kell havi díjat fizetni. Ha később változik valami, elég a tartalmat frissíteni – a kód marad ugyanaz.",
 
+    "benefits-kicker": "Miért éri meg?",
     "benefits-title": "Miért jobb, mint egy sima papír névjegykártya?",
     "benefit1-title": "Mindig naprakész",
     "benefit1-text": "Telefonszám, e-mail, Facebook, Instagram, TikTok – ha bármi változik, frissítjük a felületet, a kinyomtatott QR-kód maradhat.",
@@ -804,6 +1106,7 @@ const texts = {
     "benefit3-title": "Havi díj nélkül",
     "benefit3-text": "GitHub Pages-re kerül, így nincs külön tárhely díj. Egyszeri fejlesztési költség, utána szabadon használhatod.",
 
+    "examples-kicker": "Élő minták",
     "examples-title": "Példák élő projektekre",
     "examples-sub": "Ilyesmit kapsz te is – a saját logóddal, színeiddel és tartalmaddal.",
     "example1-top": "Biztonsági cég – QR névjegy",
@@ -814,7 +1117,7 @@ const texts = {
     "example3-name": "QR profil + részletes oldal",
     "example3-text": "QR névjegyről egy kattintással átnyit a részletes, termékeket vagy szolgáltatásokat bemutató mini weboldalra.",
 
-    /* ajánlatkérés szekció */
+    "offers-kicker": "Rugalmas megoldások",
     "offers-title": "Ajánlatkérés (árak helyett)",
     "offers-sub": "Válaszd ki, mi érdekel, és egy gombnyomással írhatsz e-mailt. Minden csomag ára egyedi egyeztetés alapján készül.",
     "offer1-tag": "Alap",
@@ -840,12 +1143,13 @@ const texts = {
 
     "offer-btn": "✉️ Ár ajánlatot kérek (Email)",
 
-    /* Videó */
+    "video-kicker": "Rövid bemutató",
     "video-section-title": "Bemutató videó",
     "video-title": "Mivel lesz könnyebb elérni téged?",
     "video-sub": "Nézd meg a kis videót, és lásd, hogyan működik a QR névjegykártya a gyakorlatban.",
     "video-note": "Tipp: a videó elmagyarázza, hogyan menthetik el az ügyfelek egy kattintással a telefonszámodat, e-mail címedet, és hogyan tudnak azonnal írni vagy hívni.",
 
+    "contact-kicker": "Írj bátran",
     "contact-title": "Kapcsolat & ajánlatkérés",
     "contact-main": "Ha szeretnél egy QR-kódos digitális névjegykártyát vagy mini weboldalt a vállalkozásodnak, írj rám bátran.",
     "contact-list-intro": "Röviden írd le:",
@@ -870,6 +1174,7 @@ const texts = {
     "nav-video": "Video",
     "nav-contact": "Contact",
 
+    "hero-kicker": "Prezență digitală premium pentru afaceri",
     "hero-title": 'Card de vizită <span class="accent">digital cu QR</span> & mini site pentru afacerea ta',
     "hero-sub": "Cu un singur cod QR clientul ajunge la logo, date de contact, rețele sociale, mini shop sau pagină de servicii. <br>Design elegant negru–auriu, care inspiră încredere din prima secundă.",
     "badge1": "Pentru mici afaceri",
@@ -883,6 +1188,7 @@ const texts = {
     "preview-desc": "Card de vizită digital deschis din QR",
     "preview-note": "Realizăm și pentru afacerea ta o astfel de pagină premium – cu logo, culori și link-uri personalizate.",
 
+    "how-kicker": "Proces simplu",
     "how-title": "Cum funcționează?",
     "how-sub": "3 pași simpli și cardul tău digital cu QR este gata.",
     "step1-num": "Pasul 1",
@@ -895,6 +1201,7 @@ const texts = {
     "step3-title": "Utilizare & modificări",
     "step3-text": "Codul QR rămâne valabil oricât timp. Dacă se schimbă ceva, actualizăm conținutul – nu trebuie tipărit alt cod.",
 
+    "benefits-kicker": "De ce merită?",
     "benefits-title": "De ce este mai bun decât un simplu card de vizită pe hârtie?",
     "benefit1-title": "Mereu actualizat",
     "benefit1-text": "Telefon, e-mail, Facebook, Instagram, TikTok – dacă se schimbă ceva, actualizăm pagina, iar codul QR tipărit rămâne același.",
@@ -903,6 +1210,7 @@ const texts = {
     "benefit3-title": "Fără taxă lunară",
     "benefit3-text": "Pagina este găzduită pe GitHub Pages, deci nu plătești hosting separat. Plătești o singură dată realizarea, apoi o folosești cât vrei.",
 
+    "examples-kicker": "Modele live",
     "examples-title": "Exemple de proiecte live",
     "examples-sub": "Așa arată și paginile tale – cu logo, culori și conținut personalizat.",
     "example1-top": "Firmă de pază – card QR",
@@ -913,7 +1221,7 @@ const texts = {
     "example3-name": "Profil cu QR + mini site",
     "example3-text": "Din cardul de vizită cu QR clientul ajunge printr-un click la un mini site cu produse sau servicii detaliate.",
 
-    /* cerere ofertă */
+    "offers-kicker": "Soluții flexibile",
     "offers-title": "Cerere de ofertă (în loc de prețuri)",
     "offers-sub": "Alege ce te interesează și trimite un e-mail dintr-un click. Prețul se stabilește în funcție de cerințe.",
     "offer1-tag": "Basic",
@@ -939,12 +1247,13 @@ const texts = {
 
     "offer-btn": "✉️ Cer ofertă (Email)",
 
-    /* Video */
+    "video-kicker": "Prezentare scurtă",
     "video-section-title": "Video demonstrativ",
     "video-title": "Cum devine mai ușor să te contacteze?",
     "video-sub": "Uită-te la clipul scurt și vezi cum funcționează cardul QR în practică.",
     "video-note": "Tip: videoclipul arată cum pot salva clienții numărul tău, e-mailul și cum pot suna sau trimite mesaj imediat.",
 
+    "contact-kicker": "Scrie-mi direct",
     "contact-title": "Contact & cerere de ofertă",
     "contact-main": "Dacă vrei un card de vizită digital cu cod QR sau un mini site pentru afacerea ta, scrie-mi cu încredere.",
     "contact-list-intro": "Scrie-mi pe scurt:",
@@ -962,7 +1271,7 @@ const texts = {
 };
 
 /* ==========================
-   AJÁNLATKÉRÉS E-MAIL (fix + nyelvfüggő subject/body)
+   AJÁNLATKÉRÉS E-MAIL
    ========================== */
 const EMAIL_TO = "norbertnagy9898@yahoo.com";
 
@@ -1098,10 +1407,12 @@ function setLanguage(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
 
-  for (const key in map) {
-    const el = document.querySelector('[data-i18n="'+key+'"]');
-    if (el) el.innerHTML = map[key];
-  }
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (map[key] !== undefined) {
+      el.innerHTML = map[key];
+    }
+  });
 
   document.getElementById('btn-hu').classList.toggle('active', lang === 'hu');
   document.getElementById('btn-ro').classList.toggle('active', lang === 'ro');
